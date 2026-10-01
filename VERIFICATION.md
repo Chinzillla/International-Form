@@ -24,7 +24,7 @@ The parser checks confirm JSON syntax, not full Adaptive Cards schema conformanc
 
 ### Supplied localization files updated
 
-The user supplied six localization JSON files (de-DE, es-US, ja-JP, ko-KR, zh-CN, zh-TW). For form7.FormSubmission card `8NF3jZ`, the two button-title values now remain `Start Feedback` and `End Demo` in each file. JSON parsing succeeded for all six; comparison against the repository version confirmed that the key sets and all other values are unchanged. Upload instructions are in `Localizations/README.md`. These changes have not been uploaded to Studio or tested in the agent.
+The user supplied six localization JSON files (de-DE, es-US, ja-JP, ko-KR, zh-CN, zh-TW). An initial English-only edit changed two button titles per file and was validated. The user then clarified that these titles should remain translated and pointed out that the working review card is a Power Fx card while feedback is JSON. The original translated titles have been restored. The proposed form7.FormSubmission revision is now a Formula card with the same primary-language button values, output binding, and English conditions, plus a temporary FeedbackAction diagnostic. Upload instructions are in `Localizations/README.md`. Formula-mode feedback behavior has not been tested in Studio by Codex or confirmed by the user.
 
 ### Review repair confirmed by the user
 

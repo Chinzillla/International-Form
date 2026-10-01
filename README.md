@@ -10,8 +10,8 @@ The supplied logic is preserved in `topics/` and `flows/`. Findings and suggeste
 - [Verification record](VERIFICATION.md): checks performed and remaining live-agent checks.
 - [Corrected editor copy](revisions/helper2.FormValidationEditor.yaml): the latest supplied editor with normalization, TRACE A, and all five section conditions changed to use `Topic.SectionRoute`. This addresses section routing only; the other review findings remain.
 - [Proceed and review-loop repair](revisions/review-loop/README.md): seven revised topic copies that remove nested review calls and give Proceed/Edit stable identifiers. This supersedes the earlier editor-only revision when applied as a set.
-- [Feedback completion repair](revisions/feedback-completion/README.md): revised submission and feedback topics with matching English button titles and IDs and a normal return after feedback.
-- [Localization upload notes](Localizations/README.md): six supplied localization files updated to keep the feedback button titles in English for the same routing in every language.
+- [Feedback completion repair](revisions/feedback-completion/README.md): revised submission and feedback topics with a Power Fx submission card, English routing IDs, translated button titles, and a normal return after feedback.
+- [Localization upload notes](Localizations/README.md): six supplied localization files with translated feedback button titles restored.
 
 ## Saved files
 

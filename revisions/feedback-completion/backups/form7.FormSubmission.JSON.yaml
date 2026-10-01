@@ -11,63 +11,59 @@ beginDialog:
     - kind: AdaptiveCardPrompt
       id: 8NF3jZ
       card: |-
-        ={
-          type: "AdaptiveCard",
-          '$schema': "https://adaptivecards.io/schemas/adaptive-card.json",
-          version: "1.5",
-          body: [
+        {
+          "type": "AdaptiveCard",
+          "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+          "version": "1.5",
+          "body": [
             {
-              type: "TextBlock",
-              text: "Mock Submission - {Insert any message here}",
-              wrap: true
+              "type": "TextBlock",
+              "text": "Mock Submission - {Insert any message here}",
+              "wrap": true
             },
             {
-              type: "TextBlock",
-              text: "Thank you for testing the International Support Form for Digital Equipment. Please leave your feedback if you have any on the form.",
-              wrap: true,
-              spacing: "Large"
+              "type": "TextBlock",
+              "text": "Thank you for testing the International Support Form for Digital Equipment. Please leave your feedback if you have any on the form.",
+              "wrap": true,
+              "spacing": "Large"
             },
             {
-              type: "TextBlock",
-              text: "Best regards,",
-              wrap: true
+              "type": "TextBlock",
+              "text": "Best regards,",
+              "wrap": true
             },
             {
-              type: "TextBlock",
-              text: "Brandon Chin",
-              wrap: true,
-              spacing: "None"
+              "type": "TextBlock",
+              "text": "Brandon Chin",
+              "wrap": true,
+              "spacing": "None"
             },
             {
-              type: "TextBlock",
-              text: "Air Techniques",
-              wrap: true,
-              spacing: "None"
+              "type": "TextBlock",
+              "text": "Air Techniques",
+              "wrap": true,
+              "spacing": "None"
             },
             {
-              type: "ActionSet",
-              actions: [
+              "type": "ActionSet",
+              "actions": [
                 {
-                  type: "Action.Submit",
-                  title: "Start Feedback",
-                  id: "Start Feedback",
-                  data: {
-                    actionSubmitId: "Start Feedback"
-                  },
-                  style: "positive"
+                  "type": "Action.Submit",
+                  "title": "Start Feedback",
+                  "id": "Start Feedback",
+                  "data": { "actionSubmitId": "Start Feedback" },
+                  "style": "positive"
                 },
                 {
-                  type: "Action.Submit",
-                  title: "End Demo",
-                  id: "End Demo",
-                  data: {
-                    actionSubmitId: "End Demo"
-                  },
-                  style: "destructive"
+                  "type": "Action.Submit",
+                  "title": "End Demo",
+                  "id": "End Demo",
+                  "data": { "actionSubmitId": "End Demo" },
+                  "style": "destructive"
                 }
               ],
-              spacing: "Large",
-              horizontalAlignment: "Left"
+              "spacing": "Large",
+              "horizontalAlignment": "Left"
             }
           ]
         }
@@ -78,10 +74,6 @@ beginDialog:
       outputType:
         properties:
           actionSubmitId: String
-
-    - kind: SendActivity
-      id: debugFeedbackAction
-      activity: "FeedbackAction=[{Topic.feedbackForm}]"
 
     - kind: ConditionGroup
       id: conditionGroup_weE5Pg
