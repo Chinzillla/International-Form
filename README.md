@@ -10,6 +10,8 @@ The supplied logic is preserved in `topics/` and `flows/`. Findings and suggeste
 - [Verification record](VERIFICATION.md): checks performed and remaining live-agent checks.
 - [Corrected editor copy](revisions/helper2.FormValidationEditor.yaml): the latest supplied editor with normalization, TRACE A, and all five section conditions changed to use `Topic.SectionRoute`. This addresses section routing only; the other review findings remain.
 - [Proceed and review-loop repair](revisions/review-loop/README.md): seven revised topic copies that remove nested review calls and give Proceed/Edit stable identifiers. This supersedes the earlier editor-only revision when applied as a set.
+- [Feedback completion repair](revisions/feedback-completion/README.md): revised submission and feedback topics with matching English button titles and IDs and a normal return after feedback.
+- [Localization upload notes](Localizations/README.md): six supplied localization files updated to keep the feedback button titles in English for the same routing in every language.
 
 ## Saved files
 
@@ -17,6 +19,6 @@ The supplied logic is preserved in `topics/` and `flows/`. Findings and suggeste
 
 `flows/InternationalFormEmail/` contains the trigger, email action, and response as three individual JSON files. `flows/InternationalFormTranslation/` contains the trigger, two translation actions, and response as four individual JSON files. JSON formatting is normalized; property values and expressions are preserved, including the leading space in ` writtenFeedback`.
 
-These files are source snippets, not a complete importable Power Platform solution. Agent settings, localization resources, connections, global-variable definitions, action wrappers, and several referenced system topics were not supplied.
+These files are source snippets, not a complete importable Power Platform solution. Six secondary-language localization files were supplied later and are saved in `Localizations/`. Agent settings, connections, global-variable definitions, action wrappers, and several referenced system topics were not supplied.
 
 The source code fences originally labeled bash, arduino, or css were YAML and are saved with `.yaml` extensions. The review card remains a Power Fx expression embedded inside YAML.

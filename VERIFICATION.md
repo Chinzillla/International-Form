@@ -22,6 +22,10 @@ The parser checks confirm JSON syntax, not full Adaptive Cards schema conformanc
 
 ## Live checks still needed
 
+### Supplied localization files updated
+
+The user supplied six localization JSON files (de-DE, es-US, ja-JP, ko-KR, zh-CN, zh-TW). For form7.FormSubmission card `8NF3jZ`, the two button-title values now remain `Start Feedback` and `End Demo` in each file. JSON parsing succeeded for all six; comparison against the repository version confirmed that the key sets and all other values are unchanged. Upload instructions are in `Localizations/README.md`. These changes have not been uploaded to Studio or tested in the agent.
+
 ### Review repair confirmed by the user
 
 On October 1, 2026, the user confirmed that matching the review button title, id, and data.actionSubmitId (`Proceed` / `Edit`) works in both tested languages. They then confirmed that Edit -> change Preliminary Info -> return to review -> Proceed passes. The revised sources are in `revisions/review-loop/`; the original snapshot remains unchanged. These results supersede the earlier untested status for the specific Preliminary Info edit/review path. Other section, language, backend, and published-channel checks remain separate.
