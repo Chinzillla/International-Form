@@ -1,0 +1,70 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: AdaptiveCardPrompt
+      id: UB30ko
+      card: |-
+        {
+          "type": "AdaptiveCard",
+          "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+          "version": "1.5",
+          "body": [
+            {
+              "type": "TextBlock",
+              "text": "Device Information",
+              "wrap": true,
+              "size": "ExtraLarge"
+            },
+            {
+              "type": "Input.Text",
+              "id": "deviceModelOrPartNumber",
+              "label": "Device Model or Part Number",
+              "placeholder": "Enter the device model or part number",
+              "isRequired": true,
+              "errorMessage": "Please enter a valid Device Model or Part Number"
+            },
+            {
+              "type": "Input.Text",
+              "id": "deviceSerialNumber",
+              "label": "Device Serial Number",
+              "placeholder": "Enter a device serial number",
+              "isRequired": true,
+              "errorMessage": "Please enter a valid Device Serial Number"
+            }
+          ],
+          "actions": [
+            {
+              "type": "Action.Submit",
+              "title": "Finish form",
+              "id": "finishDevice",
+              "associatedInputs": "auto",
+              "conditionallyEnabled": true,
+              "data": {
+                "actionSubmitId": "finishDevice"
+              }
+            }
+          ]
+        }
+      output:
+        binding:
+          actionSubmitId: Topic.actionSubmitId
+          deviceModelOrPartNumber: Global.deviceModelOrPartNumber
+          deviceSerialNumber: Global.deviceSerialNumber
+
+      outputType:
+        properties:
+          actionSubmitId: String
+          deviceModelOrPartNumber: String
+          deviceSerialNumber: String
+
+    - kind: BeginDialog
+      id: Nls7Mt
+      dialog: brandon_Agent09232026.topic.helper1.FormValidationCondition
+
+    - kind: EndDialog
+      id: VJ3J8F
+
+inputType: {}
+outputType: {}

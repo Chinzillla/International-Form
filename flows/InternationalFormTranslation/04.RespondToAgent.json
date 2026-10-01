@@ -1,0 +1,39 @@
+{
+  "type": "Response",
+  "kind": "Skills",
+  "inputs": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "userrequest": {
+          "title": "UserRequest",
+          "description": "Translated user request",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "feedback": {
+          "title": "Feedback",
+          "description": "Translated feedback",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        }
+      },
+      "additionalProperties": {}
+    },
+    "statusCode": 200,
+    "body": {
+      "userrequest": "@{body('Translate_UserRequest')}",
+      "feedback": "@{body('Translate_feedback')}"
+    }
+  },
+  "runAfter": {
+    "Translate_feedback": [
+      "SUCCEEDED"
+    ]
+  },
+  "metadata": {
+    "operationMetadataId": "81c94f73-dd52-465c-ad3b-a4686da63cc3"
+  }
+}

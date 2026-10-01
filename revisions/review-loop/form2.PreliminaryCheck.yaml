@@ -1,0 +1,90 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: AdaptiveCardPrompt
+      id: B4Vlin
+      card: |-
+        {
+          "type": "AdaptiveCard",
+          "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+          "version": "1.5",
+          "body": [
+            {
+              "type": "TextBlock",
+              "text": "Preliminary Information",
+              "wrap": true,
+              "size": "ExtraLarge",
+              "separator": true
+            },
+            {
+              "type": "Input.Text",
+              "id": "contactName",
+              "placeholder": "Enter your name",
+              "label": "What is your name?",
+              "isRequired": true,
+              "errorMessage": "Please enter your name",
+              "spacing": "ExtraLarge"
+            },
+            {
+              "type": "Input.Text",
+              "id": "contactEmail",
+              "placeholder": "Enter an email",
+              "label": "What is the best email address to contact you?",
+              "style": "Email",
+              "isRequired": true,
+              "errorMessage": "Please enter a valid email address",
+              "spacing": "ExtraLarge",
+              "regex": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+            },
+            {
+              "type": "Input.Text",
+              "id": "caseNumber",
+              "label": "Do you have an active case number? If you do, please enter the case number",
+              "placeholder": "Case Number",
+              "spacing": "ExtraLarge"
+            },
+            {
+              "type": "Input.Text",
+              "id": "airTechniquesContact",
+              "label": "Is Air Techniques already working on this issue? If so, who is your contact?",
+              "placeholder": "Air Tech Contact",
+              "spacing": "ExtraLarge"
+            }
+          ],
+          "actions": [
+            {
+              "type": "Action.Submit",
+              "title": "Continue",
+              "id": "continuePreliminary",
+              "associatedInputs": "auto",
+              "conditionallyEnabled": true,
+              "data": {
+                "actionSubmitId": "continuePreliminary"
+              },
+              "style": "positive"
+            }
+          ]
+        }
+      output:
+        binding:
+          actionSubmitId: Global.actionSubmitId
+          airTechniquesContact: Global.airTechniquesContact
+          caseNumber: Global.caseNumber
+          contactEmail: Global.contactEmail
+          contactName: Global.contactName
+
+      outputType:
+        properties:
+          actionSubmitId: String
+          airTechniquesContact: String
+          caseNumber: String
+          contactEmail: String
+          contactName: String
+
+    - kind: EndDialog
+      id: ENTmNw
+
+inputType: {}
+outputType: {}

@@ -1,0 +1,149 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: SetVariable
+      id: setVariable_Vverkf
+      variable: Global.FirstTimeFormState
+      value: =false
+
+    - kind: ConditionGroup
+      id: conditionGroup_zUZWWH
+      conditions:
+        - id: conditionItem_KCM3L7
+          condition: =Global.formValidation = "Proceed"
+
+      elseActions:
+        - kind: AdaptiveCardPrompt
+          id: 1CZX0t
+          displayName: Select Sections to Update
+          card: |-
+            {
+              "type": "AdaptiveCard",
+              "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+              "version": "1.5",
+              "body": [
+                {
+                  "type": "Input.ChoiceSet",
+                  "label": "Which Section(s) do you want to update?",
+                  "choices": [
+                    {
+                      "title": "Request",
+                      "value": "request"
+                    },
+                    {
+                      "title": "Preliminary Info",
+                      "value": "preliminary_info"
+                    },
+                    {
+                      "title": "Dealer Info",
+                      "value": "dealer_info"
+                    },
+                    {
+                      "title": "Practice Info",
+                      "value": "practice_info"
+                    },
+                    {
+                      "title": "Device Info",
+                      "value": "device_info"
+                    }
+                  ],
+                  "placeholder": "Select Section",
+                  "id": "1"
+                },
+                {
+                  "type": "ActionSet",
+                  "actions": [
+                    {
+                      "type": "Action.Submit",
+                      "title": "Edit",
+                      "id": "ApplyEdits",
+                      "data": {
+                        "actionSubmitId": "ApplyEdits"
+                      },
+                      "style": "positive"
+                    },
+                    {
+                      "type": "Action.Submit",
+                      "title": "Cancel",
+                      "id": "CancelEdits",
+                      "data": {
+                        "actionSubmitId": "CancelEdits"
+                      },
+                      "style": "destructive"
+                    }
+                  ]
+                }
+              ]
+            }
+          output:
+            binding:
+              1: Topic.SectionChoice
+              actionSubmitId: Topic.EditSelection
+
+          outputType:
+            properties:
+              1: String
+              actionSubmitId: String
+
+        - kind: SetVariable
+          id: normalizeSectionRoute
+          variable: Topic.SectionRoute
+          value: =Substitute(Lower(Trim(Topic.SectionChoice)), " ", "_")
+
+        - kind: ConditionGroup
+          id: rNT3n9
+          conditions:
+            - id: Llpn5l
+              condition: =Topic.EditSelection = "ApplyEdits"
+              actions:
+                - kind: ConditionGroup
+                  id: jM5hiz
+                  conditions:
+                    - id: 3gs5Uq
+                      condition: =Topic.SectionRoute = "request"
+                      actions:
+                        - kind: BeginDialog
+                          id: MfNysO
+                          dialog: brandon_Agent09232026.topic.wf2.UserRequest
+
+                    - id: conditionItem_fL5cBN
+                      condition: =Topic.SectionRoute = "preliminary_info"
+                      actions:
+                        - kind: SendActivity
+                          id: debugPreliminaryBranch
+                          activity: "TRACE A: Preliminary Info branch selected."
+
+                        - kind: BeginDialog
+                          id: MnSVpg
+                          dialog: brandon_Agent09232026.topic.wf3.PreliminaryCheck
+
+                    - id: conditionItem_eDKnyU
+                      condition: =Topic.SectionRoute = "dealer_info"
+                      actions:
+                        - kind: BeginDialog
+                          id: tyWaXD
+                          dialog: brandon_Agent09232026.topic.wf4.DealerInfo
+
+                    - id: conditionItem_srzJZL
+                      condition: =Topic.SectionRoute = "practice_info"
+                      actions:
+                        - kind: BeginDialog
+                          id: fKb5Kd
+                          dialog: brandon_Agent09232026.topic.wf5.PracticeInfo
+
+                    - id: conditionItem_vqJ227
+                      condition: =Topic.SectionRoute = "device_info"
+                      actions:
+                        - kind: BeginDialog
+                          id: wCZpkq
+                          dialog: brandon_Agent09232026.topic.wf6.DeviceInfo
+
+        - kind: BeginDialog
+          id: 0raJQa
+          dialog: brandon_Agent09232026.topic.wf7.FormValidation
+
+inputType: {}
+outputType: {}
+

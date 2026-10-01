@@ -1,0 +1,36 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: Question
+      id: CF7xoW
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: Global.feedbackData
+      prompt: If you'd like, please provide any additional written feedback. You can also type "skip".
+      entity:
+        kind: StringPrebuiltEntity
+        sensitivityLevel: None
+
+    - kind: ConditionGroup
+      id: conditionGroup_rzMXsM
+      conditions:
+        - id: conditionItem_FQHETn
+          condition: =Lower(Trim(Global.feedbackData)) = "skip"
+          actions:
+            - kind: SetVariable
+              id: clearFeedbackData
+              variable: Global.feedbackData
+              value: =""
+
+    - kind: SendActivity
+      id: AoIk6Y
+      activity: Thanks for your feedback.
+
+    - kind: EndDialog
+      id: returnFromFeedback
+
+inputType: {}
+outputType: {}

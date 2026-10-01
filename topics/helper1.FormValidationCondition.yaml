@@ -1,0 +1,20 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_kiAkSm
+      conditions:
+        - id: conditionItem_3FNCY6
+          condition: =Global.FirstTimeFormState = false
+          actions:
+            - kind: BeginDialog
+              id: hMUX3J
+              dialog: brandon_Agent09232026.topic.wf7.FormValidation
+
+    - kind: EndDialog
+      id: Gilahg
+
+inputType: {}
+outputType: {}

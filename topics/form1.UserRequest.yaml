@@ -1,0 +1,72 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: AdaptiveCardPrompt
+      id: 7EtTZF
+      card: |-
+        {
+          "type": "AdaptiveCard",
+          "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+          "version": "1.5",
+          "body": [
+            {
+              "type": "TextBlock",
+              "text": "To get started, please enter the issue or question you need assistance with.",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "When you submit this form, your details like name and email address are not automatically collected unless you provide them yourself.",
+              "wrap": true,
+              "fontType": "Default",
+              "size": "Small",
+              "weight": "Default",
+              "color": "Attention"
+            },
+            {
+              "type": "Input.Text",
+              "placeholder": "Please describe the issue or question here...",
+              "id": "1",
+              "isMultiline": true,
+              "separator": true,
+              "spacing": "Medium",
+              "isRequired": true,
+              "errorMessage": "Please enter an issue or question",
+              "label": "Issue or Question request:"
+            }
+          ],
+          "actions": [
+            {
+              "type": "Action.Submit",
+              "title": "Start request",
+              "associatedInputs": "auto",
+              "conditionallyEnabled": true,
+              "data": {
+                "actionType": "submitForm"
+              }
+            }
+          ]
+        }
+      output:
+        binding:
+          1: Global.UserRequest
+          actionSubmitId: Topic.actionSubmitId
+          actionType: Topic.actionType
+
+      outputType:
+        properties:
+          1: String
+          actionSubmitId: String
+          actionType: String
+
+    - kind: BeginDialog
+      id: wj8bho
+      dialog: brandon_Agent09232026.topic.helper1.FormValidationCondition
+
+    - kind: EndDialog
+      id: Wp8FhE
+
+inputType: {}
+outputType: {}

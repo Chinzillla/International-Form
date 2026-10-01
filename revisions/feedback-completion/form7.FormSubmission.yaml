@@ -1,0 +1,109 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: SetVariable
+      id: initializeFeedbackData
+      variable: Global.feedbackData
+      value: =""
+
+    - kind: AdaptiveCardPrompt
+      id: 8NF3jZ
+      card: |-
+        {
+          "type": "AdaptiveCard",
+          "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+          "version": "1.5",
+          "body": [
+            {
+              "type": "TextBlock",
+              "text": "Mock Submission - {Insert any message here}",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Thank you for testing the International Support Form for Digital Equipment. Please leave your feedback if you have any on the form.",
+              "wrap": true,
+              "spacing": "Large"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Best regards,",
+              "wrap": true
+            },
+            {
+              "type": "TextBlock",
+              "text": "Brandon Chin",
+              "wrap": true,
+              "spacing": "None"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Air Techniques",
+              "wrap": true,
+              "spacing": "None"
+            },
+            {
+              "type": "ActionSet",
+              "actions": [
+                {
+                  "type": "Action.Submit",
+                  "title": "Start Feedback",
+                  "id": "Start Feedback",
+                  "data": { "actionSubmitId": "Start Feedback" },
+                  "style": "positive"
+                },
+                {
+                  "type": "Action.Submit",
+                  "title": "End Demo",
+                  "id": "End Demo",
+                  "data": { "actionSubmitId": "End Demo" },
+                  "style": "destructive"
+                }
+              ],
+              "spacing": "Large",
+              "horizontalAlignment": "Left"
+            }
+          ]
+        }
+      output:
+        binding:
+          actionSubmitId: Topic.feedbackForm
+
+      outputType:
+        properties:
+          actionSubmitId: String
+
+    - kind: ConditionGroup
+      id: conditionGroup_weE5Pg
+      conditions:
+        - id: conditionItem_bmmUxX
+          condition: =Lower(Trim(Topic.feedbackForm)) = "start feedback"
+          actions:
+            - kind: BeginDialog
+              id: C6mX0V
+              dialog: brandon_Agent09232026.topic.wf9dev.Feedback
+
+        - id: endDemoSelected
+          condition: =Lower(Trim(Topic.feedbackForm)) = "end demo"
+          actions:
+            - kind: SetVariable
+              id: setVariable_SioJTM
+              variable: Global.feedbackData
+              value: =""
+
+      elseActions:
+        - kind: SendActivity
+          id: unknownSubmissionAction
+          activity: "Submission action was not recognized: [{Topic.feedbackForm}]. Please select Start Feedback or End Demo on the current card."
+
+        - kind: GotoAction
+          id: retrySubmissionAction
+          actionId: 8NF3jZ
+
+    - kind: EndDialog
+      id: Tk0LIe
+
+inputType: {}
+outputType: {}

@@ -1,0 +1,80 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: AdaptiveCardPrompt
+      id: 5KgKzg
+      card: |-
+        {
+          "type": "AdaptiveCard",
+          "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+          "version": "1.5",
+          "body": [
+            {
+              "type": "TextBlock",
+              "text": "Dealer Information",
+              "wrap": true,
+              "size": "ExtraLarge"
+            },
+            {
+              "type": "Input.Text",
+              "id": "dealerName",
+              "label": "Dealer Name",
+              "placeholder": "Enter the dealer name"
+            },
+            {
+              "type": "Input.Text",
+              "id": "dealerBranch",
+              "label": "Dealer Branch (If applicable)",
+              "placeholder": "Enter the dealer branch"
+            },
+            {
+              "type": "Input.Text",
+              "id": "dealerPhone",
+              "label": "Dealer telephone number:",
+              "style": "Tel",
+              "placeholder": "+1 (123) 123-1234"
+            },
+            {
+              "type": "Input.Text",
+              "id": "dealerAddress",
+              "label": "Dealer Address:",
+              "placeholder": "Enter the Address, Postal Code, and Country",
+              "isMultiline": true
+            }
+          ],
+          "actions": [
+            {
+              "type": "Action.Submit",
+              "title": "Continue",
+              "id": "continueDealer",
+              "associatedInputs": "auto",
+              "conditionallyEnabled": true,
+              "data": {
+                "actionSubmitId": "continueDealer"
+              }
+            }
+          ]
+        }
+      output:
+        binding:
+          actionSubmitId: Topic.actionSubmitId
+          dealerAddress: Global.dealerAddress
+          dealerBranch: Global.dealerBranch
+          dealerName: Global.dealerName
+          dealerPhone: Global.dealerPhone
+
+      outputType:
+        properties:
+          actionSubmitId: String
+          dealerAddress: String
+          dealerBranch: String
+          dealerName: String
+          dealerPhone: String
+
+    - kind: EndDialog
+      id: aAKGBW
+
+inputType: {}
+outputType: {}

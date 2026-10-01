@@ -1,0 +1,35 @@
+{
+  "type": "Request",
+  "kind": "Skills",
+  "inputs": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "Users request",
+          "title": "UserRequest",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_1": {
+          "description": "Users feedback",
+          "title": "Feedback",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        }
+      },
+      "required": [
+        "text",
+        "text_1"
+      ]
+    }
+  },
+  "metadata": {
+    "operationMetadataId": "b8f61c18-7224-4f8a-9c5f-72fbce5df764",
+    "flowSystemMetadata": {
+      "flowKind": "Stateful"
+    }
+  }
+}

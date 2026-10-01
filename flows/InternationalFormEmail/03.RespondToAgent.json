@@ -1,0 +1,21 @@
+{
+  "type": "Response",
+  "kind": "Skills",
+  "inputs": {
+    "schema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": {}
+    },
+    "statusCode": 200,
+    "body": {}
+  },
+  "runAfter": {
+    "Send_an_email_(V2)": [
+      "SUCCEEDED"
+    ]
+  },
+  "metadata": {
+    "operationMetadataId": "81c94f73-dd52-465c-ad3b-a4686da63cc3"
+  }
+}

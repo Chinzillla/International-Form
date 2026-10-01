@@ -1,0 +1,20 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnConversationStart
+  id: main
+  actions:
+    - kind: BeginDialog
+      id: eGIpUy
+      input: {}
+      dialog: brandon_Agent09232026.topic.wf1.LanguagePreferenceCopy
+      output:
+        binding:
+          UserLanguage: Global.UserLanguage
+
+    - kind: SendActivity
+      id: sendActivity_PU6cm4
+      displayName: greetUser
+      activity: "`Hello! How can I help you today? Please describe the issue you're experiencing.`"
+
+inputType: {}
+outputType: {}

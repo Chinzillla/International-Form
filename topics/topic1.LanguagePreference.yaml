@@ -1,0 +1,180 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: Question
+      id: question_CyI4ZO
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: Topic.UserLanguage
+      prompt: "Please choose your preferred Language:"
+      entity:
+        kind: EmbeddedEntity
+        sensitivityLevel: None
+        definition:
+          kind: ClosedListEntity
+          items:
+            - id: English (English)
+              displayName: English (English)
+
+            - id: Deutsch (German)
+              displayName: Deutsch (German)
+
+            - id: Español (Spanish)
+              displayName: Español (Spanish)
+
+            - id: 简体中文 (Simplified Chinese)
+              displayName: 简体中文 (Simplified Chinese)
+
+            - id: 日本語 (Japanese)
+              displayName: 日本語 (Japanese)
+
+            - id: 한국어 (Korean)
+              displayName: 한국어 (Korean)
+
+            - id: 繁體中文 (Traditional Chinese)
+              displayName: 繁體中文 (Traditional Chinese)
+
+    - kind: ConditionGroup
+      id: conditionGroup_sHHwTF
+      conditions:
+        - id: conditionItem_hpfTns
+          condition: =Topic.UserLanguage = 'brandon_Agent09232026.topic.wf1.LanguagePreferenceCopy.main.question_CyI4ZO'.'English (English)'
+          actions:
+            - kind: SetVariable
+              id: setVariable_S6P9Ol
+              variable: System.User.Language
+              value:
+                kind: OptionDataValue
+                type:
+                  kind: SystemOptionSet
+                  name: Locale
+
+                value: English
+
+        - id: conditionItem_bZd5Qy
+          condition: =Topic.UserLanguage = 'brandon_Agent09232026.topic.wf1.LanguagePreferenceCopy.main.question_CyI4ZO'.'Deutsch (German)'
+          actions:
+            - kind: SetVariable
+              id: VS83Ot
+              variable: System.User.Language
+              value:
+                kind: OptionDataValue
+                type:
+                  kind: SystemOptionSet
+                  name: Locale
+
+                value: German
+
+        - id: conditionItem_qB6fAd
+          condition: =Topic.UserLanguage = 'brandon_Agent09232026.topic.wf1.LanguagePreferenceCopy.main.question_CyI4ZO'.'한국어 (Korean)'
+          actions:
+            - kind: SetVariable
+              id: kXXL5K
+              variable: System.User.Language
+              value:
+                kind: OptionDataValue
+                type:
+                  kind: SystemOptionSet
+                  name: Locale
+
+                value: Korean
+
+        - id: conditionItem_ZbPXvg
+          condition: =Topic.UserLanguage = 'brandon_Agent09232026.topic.wf1.LanguagePreferenceCopy.main.question_CyI4ZO'.'日本語 (Japanese)'
+          actions:
+            - kind: SetVariable
+              id: 0ACDKT
+              variable: System.User.Language
+              value:
+                kind: OptionDataValue
+                type:
+                  kind: SystemOptionSet
+                  name: Locale
+
+                value: Japanese
+
+        - id: conditionItem_FgDjiu
+          condition: =Topic.UserLanguage = 'brandon_Agent09232026.topic.wf1.LanguagePreferenceCopy.main.question_CyI4ZO'.'简体中文 (Simplified Chinese)'
+          actions:
+            - kind: SetVariable
+              id: CwTCh3
+              variable: System.User.Language
+              value:
+                kind: OptionDataValue
+                type:
+                  kind: SystemOptionSet
+                  name: Locale
+
+                value: Chinese_Simplified
+
+        - id: conditionItem_t1phrz
+          condition: =Topic.UserLanguage = 'brandon_Agent09232026.topic.wf1.LanguagePreferenceCopy.main.question_CyI4ZO'.'繁體中文 (Traditional Chinese)'
+          actions:
+            - kind: SetVariable
+              id: t7GARi
+              variable: System.User.Language
+              value:
+                kind: OptionDataValue
+                type:
+                  kind: SystemOptionSet
+                  name: Locale
+
+                value: Chinese_Traditional
+
+        - id: conditionItem_bZ9H9E
+          condition: =Topic.UserLanguage = 'brandon_Agent09232026.topic.wf1.LanguagePreferenceCopy.main.question_CyI4ZO'.'Español (Spanish)'
+          actions:
+            - kind: SetVariable
+              id: WoJZQV
+              variable: System.User.Language
+              value:
+                kind: OptionDataValue
+                type:
+                  kind: SystemOptionSet
+                  name: Locale
+
+                value: Spanish_US
+
+      elseActions:
+        - kind: SendActivity
+          id: sendActivity_vlbE65
+          activity: Sorry, that language is not support at the moment. We will keep the language to English.
+
+        - kind: SetVariable
+          id: 5Htolf
+          variable: System.User.Language
+          value:
+            kind: OptionDataValue
+            type:
+              kind: SystemOptionSet
+              name: Locale
+
+            value: English
+
+    - kind: EndDialog
+      id: v9AQUl
+
+inputType:
+  properties:
+    UserLanguage:
+      displayName: UserLanguage
+      type:
+        kind: EmbeddedOptionSet
+        sensitivityLevel: None
+        dialogSchemaName: brandon_Agent09232026.topic.wf1.LanguagePreferenceCopy
+        triggerId: main
+        actionId: question_CyI4ZO
+
+outputType:
+  properties:
+    UserLanguage:
+      displayName: UserLanguage
+      type:
+        kind: EmbeddedOptionSet
+        sensitivityLevel: None
+        dialogSchemaName: brandon_Agent09232026.topic.wf1.LanguagePreferenceCopy
+        triggerId: main
+        actionId: question_CyI4ZO

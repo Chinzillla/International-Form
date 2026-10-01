@@ -1,0 +1,18 @@
+{
+  "type": "OpenApiConnection",
+  "inputs": {
+    "parameters": {
+      "emailMessage/To": "brandon.chin@airtechniques.com",
+      "emailMessage/Subject": "International Support Form - Case @{triggerBody()?['text_3']}",
+      "emailMessage/Body": "<h2>International Support Form</h2>\n\n<h3>Request</h3>\n<p>\n<strong>User Request:</strong><br>\n@{triggerBody()?['text']}\n</p>\n\n<hr>\n\n<h3>Preliminary Info</h3>\n\n<p>\n<strong>Contact Name:</strong> @{triggerBody()?['text_1']}<br>\n<strong>Contact Email:</strong> @{triggerBody()?['text_2']}<br>\n<strong>Case Number:</strong> @{triggerBody()?['text_3']}<br>\n<strong>AT Contact:</strong> @{triggerBody()?['text_4']}\n</p>\n\n<hr>\n\n<h3>Dealer Info</h3>\n\n<p>\n<strong>Dealer Name:</strong> @{triggerBody()?['text_5']}<br>\n<strong>Dealer Branch:</strong> @{triggerBody()?['text_6']}<br>\n<strong>Dealer Telephone:</strong> @{triggerBody()?['text_7']}<br>\n<strong>Dealer Address:</strong> @{triggerBody()?['text_8']}\n</p>\n\n<hr>\n\n<h3>Practice Info</h3>\n\n<p>\n<strong>Practice Name:</strong> @{triggerBody()?['text_9']}<br>\n<strong>Practice Telephone:</strong> @{triggerBody()?['text_10']}<br>\n<strong>Practice Address:</strong> @{triggerBody()?['text_11']}\n</p>\n\n<hr>\n\n<h3>Device Info</h3>\n\n<p>\n<strong>Model/Part Number:</strong> @{triggerBody()?['text_12']}<br>\n<strong>Serial Number:</strong> @{triggerBody()?['text_13']}\n</p>\n\n<hr>\n\n<h3>Additional Feedback</h3>\n\n<p>\n@{triggerBody()?['text_14']}\n</p>",
+      "emailMessage/Cc": "@triggerBody()?['text_2']",
+      "emailMessage/Importance": "Normal"
+    },
+    "host": {
+      "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+      "connection": "shared_office365",
+      "operationId": "SendEmailV2"
+    }
+  },
+  "runAfter": {}
+}

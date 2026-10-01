@@ -1,0 +1,180 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: AdaptiveCardPrompt
+      id: hHGJWg
+      card: |-
+        =        {
+                  type: "AdaptiveCard",
+                  '$schema': "https://adaptivecards.io/schemas/adaptive-card.json",
+                  version: "1.5",
+                  body: [
+                    {
+                      type: "TextBlock",
+                      wrap: true,
+                      text: "Verify International Form Info:",
+                      weight: "bolder",
+                      size: "large"
+                    },
+                    {
+                      type: "TextBlock",
+                      text: "Please check the details below. Select Edit to make changes.",
+                      wrap: true
+                    },
+                    {
+                      type: "TextBlock",
+                      text: "Request",
+                      wrap: true,
+                      weight: "bolder",
+                      spacing: "medium"
+                    },
+                    {
+                      type: "FactSet",
+                      facts: [
+                        {
+                          title: "",
+                          value: If(IsBlank(Global.UserRequest), "", Global.UserRequest)
+                        }
+                      ],
+                      separator: true
+                    },
+                    {
+                      type: "TextBlock",
+                      text: "Preliminary Info",
+                      wrap: true,
+                      weight: "bolder",
+                      spacing: "medium"
+                    },
+                    {
+                      type: "FactSet",
+                      facts: [
+                        {
+                          title: "Contact Name:",
+                          value: If(IsBlank(Global.contactName), "", Global.contactName)
+                        },
+                        {
+                          title: "Contact Email:",
+                          value: If(IsBlank(Global.contactEmail), "", Global.contactEmail)
+                        },
+                        {
+                          title: "Case Number:",
+                          value: If(IsBlank(Global.caseNumber), "", Global.caseNumber)
+                        },
+                        {
+                          title: "AT Contact:",
+                          value: If(IsBlank(Global.airTechniquesContact), "", Global.airTechniquesContact)
+                        }
+                      ],
+                      separator: true
+                    },
+                    {
+                      type: "TextBlock",
+                      text: "Dealer Info",
+                      wrap: true,
+                      spacing: "medium",
+                      weight: "bolder"
+                    },
+                    {
+                      type: "FactSet",
+                      facts: [
+                        {
+                          title: "Dealer Name:",
+                          value: If(IsBlank(Global.dealerName), "", Global.dealerName)
+                        },
+                        {
+                          title: "Dealer Branch:",
+                          value: If(IsBlank(Global.dealerBranch), "", Global.dealerBranch)
+                        },
+                        {
+                          title: "Dealer Telephone:",
+                          value: If(IsBlank(Global.dealerPhone), "", Global.dealerPhone)
+                        },
+                        {
+                          title: "Dealer Address:",
+                          value: If(IsBlank(Global.dealerAddress), "", Global.dealerAddress)
+                        }
+                      ],
+                      separator: true
+                    },
+                    {
+                      type: "TextBlock",
+                      text: "Practice Info",
+                      wrap: true,
+                      spacing: "medium",
+                      weight: "bolder"
+                    },
+                    {
+                      type: "FactSet",
+                      facts: [
+                        {
+                          title: "Practice Name:",
+                          value: If(IsBlank(Global.practiceName), "", Global.practiceName)
+                        },
+                        {
+                          title: "Practice Telephone:",
+                          value: If(IsBlank(Global.practicePhone), "", Global.practicePhone)
+                        },
+                        {
+                          title: "Practice Address:",
+                          value: If(IsBlank(Global.practiceAddress), "", Global.practiceAddress)
+                        }
+                      ],
+                      separator: true
+                    },
+                    {
+                      type: "TextBlock",
+                      text: "Device Info",
+                      wrap: true,
+                      spacing: "medium",
+                      weight: "bolder"
+                    },
+                    {
+                      type: "FactSet",
+                      facts: [
+                        {
+                          title: "Model/Part Number:",
+                          value: If(IsBlank(Global.deviceModelOrPartNumber), "", Global.deviceModelOrPartNumber)
+                        },
+                        {
+                          title: "Serial Number:",
+                          value: If(IsBlank(Global.deviceSerialNumber), "", Global.deviceSerialNumber)
+                        }
+                      ],
+                      separator: true
+                    },
+                    {
+                      type: "ActionSet",
+                      actions: [
+                        {
+                          type: "Action.Submit",
+                          title: "Proceed",
+                          style: "positive"
+                        },
+                        {
+                          type: "Action.Submit",
+                          title: "Edit"
+                        }
+                      ],
+                      spacing: "extraLarge"
+                    }
+                  ]
+                }
+      output:
+        binding:
+          actionSubmitId: Global.formValidation
+
+      outputType:
+        properties:
+          actionSubmitId: String
+
+    - kind: BeginDialog
+      id: 4p9dZL
+      dialog: brandon_Agent09232026.topic.helper2.FormValidationEditor
+
+    - kind: EndDialog
+      id: aDXWzi
+
+inputType: {}
+outputType: {}

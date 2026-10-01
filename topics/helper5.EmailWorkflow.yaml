@@ -1,0 +1,12 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: BeginDialog
+      id: 9ZHZ9i
+      dialog: brandon_Agent09232026.topic.Signin
+
+    - kind: BeginDialog
+      id: dpLGbg
+      dialog: brandon_Agent09232026.action.InternationalFormEmail

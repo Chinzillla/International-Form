@@ -1,0 +1,15 @@
+{
+  "type": "OpenApiConnection",
+  "inputs": {
+    "parameters": {
+      "body/Text": "@triggerBody()?['text']",
+      "to": "en"
+    },
+    "host": {
+      "apiId": "/providers/Microsoft.PowerApps/apis/shared_translatorv2",
+      "connection": "shared_translatorv2",
+      "operationId": "Translate"
+    }
+  },
+  "runAfter": {}
+}

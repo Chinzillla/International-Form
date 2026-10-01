@@ -1,0 +1,77 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: AdaptiveCardPrompt
+      id: 3859Mu
+      card: |-
+        {
+          "type": "AdaptiveCard",
+          "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+          "version": "1.5",
+          "body": [
+            {
+              "type": "TextBlock",
+              "text": "Practice Info",
+              "wrap": true,
+              "size": "Large"
+            },
+            {
+              "type": "Input.Text",
+              "id": "practiceName",
+              "label": "Practice Name",
+              "placeholder": "Enter the practice name",
+              "isRequired": true,
+              "errorMessage": "Please enter a valid practice name"
+            },
+            {
+              "type": "Input.Text",
+              "id": "practicePhone",
+              "label": "Practice Telephone Number:",
+              "placeholder": "Please enter a practice telephone number",
+              "isRequired": true,
+              "errorMessage": "Please enter a valid telephone number"
+            },
+            {
+              "type": "Input.Text",
+              "id": "practiceAddress",
+              "label": "Practice Address",
+              "placeholder": "Enter the address, Postal Code, and Country",
+              "isMultiline": true,
+              "isRequired": true,
+              "errorMessage": "Please enter a valid practice address"
+            }
+          ],
+          "actions": [
+            {
+              "type": "Action.Submit",
+              "title": "Continue",
+              "id": "continuePractice",
+              "associatedInputs": "auto",
+              "conditionallyEnabled": true,
+              "data": {
+                "actionSubmitId": "continuePractice"
+              }
+            }
+          ]
+        }
+      output:
+        binding:
+          actionSubmitId: Topic.actionSubmitId
+          practiceAddress: Global.practiceAddress
+          practiceName: Global.practiceName
+          practicePhone: Global.practicePhone
+
+      outputType:
+        properties:
+          actionSubmitId: String
+          practiceAddress: String
+          practiceName: String
+          practicePhone: String
+
+    - kind: EndDialog
+      id: btHqKN
+
+inputType: {}
+outputType: {}

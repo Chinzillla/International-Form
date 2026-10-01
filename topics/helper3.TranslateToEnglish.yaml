@@ -1,0 +1,32 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_CheckLanguage
+      conditions:
+        - id: condition_English
+          condition: =System.User.Language = Locale.English
+
+      elseActions:
+        - kind: BeginDialog
+          id: virDHq
+          input: {}
+          dialog: brandon_Agent09232026.action.InternationalFormTranslation
+          output:
+            binding:
+              feedback: Global.TranslatedFeedbackData
+              userrequest: Global.TranslatedUserRequest
+
+        - kind: SetMultipleVariables
+          id: setVariable_6Kuw7t
+          assignments:
+            - variable: Global.UserRequest
+              value: =Global.TranslatedUserRequest
+
+            - variable: Global.feedbackData
+              value: =Global.TranslatedFeedbackData
+
+inputType: {}
+outputType: {}

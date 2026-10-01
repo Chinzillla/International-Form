@@ -1,0 +1,36 @@
+kind: AdaptiveDialog
+startBehavior: CancelOtherTopics
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: BeginDialog
+      id: 7fYqGe
+      dialog: brandon_Agent09232026.topic.wf2.UserRequest
+
+    - kind: BeginDialog
+      id: qV6FpB
+      dialog: brandon_Agent09232026.topic.wf3.PreliminaryCheck
+
+    - kind: BeginDialog
+      id: AGSo06
+      dialog: brandon_Agent09232026.topic.wf4.DealerInfo
+
+    - kind: BeginDialog
+      id: ywftEr
+      dialog: brandon_Agent09232026.topic.wf5.PracticeInfo
+
+    - kind: BeginDialog
+      id: Euz46V
+      dialog: brandon_Agent09232026.topic.wf6.DeviceInfo
+
+    - kind: BeginDialog
+      id: VFrJjd
+      dialog: brandon_Agent09232026.topic.wf7.FormValidation
+
+    - kind: BeginDialog
+      id: taTAMt
+      dialog: brandon_Agent09232026.topic.wf8.FormSubmission
+
+    - kind: CancelAllDialogs
+      id: vs58M3
