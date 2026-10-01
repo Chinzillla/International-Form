@@ -1,15 +1,15 @@
 # Translated feedback button titles
 
-Updated October 1, 2026 after the user clarified that feedback buttons must remain translated. The previous English-only replacement has been reversed for the two button-title entries for `brandon_Agent09232026.topic.wf8.FormSubmission`, card `8NF3jZ`:
+Updated October 1, 2026 to keep feedback buttons translated while normalizing their observed title-based responses. The two existing translated button-title values were moved to SetTextVariable entries in `brandon_Agent09232026.topic.wf8.FormSubmission`:
 
-| Entry suffix | Source title (translated in each file) |
+| Entry after the topic/trigger prefix | Source title (translated in each file) |
 | --- | --- |
-| `.Card.body[5].actions[0].title` | `Start Feedback` |
-| `.Card.body[5].actions[1].title` | `End Demo` |
+| `'action(setFeedbackStartLabel)'.Value` | `Start Feedback` |
+| `'action(setFeedbackEndLabel)'.Value` | `End Demo` |
 
-The complete shared key prefix is `'dialog(brandon_Agent09232026.topic.wf8.FormSubmission)'.'trigger(main)'.'action(8NF3jZ)'`.
+The complete shared key prefix is `'dialog(brandon_Agent09232026.topic.wf8.FormSubmission)'.'trigger(main)'.`.
 
-The original language-specific title values are restored. All other translations and resource keys are retained. The feedback topic is now proposed as a Power Fx card, following the working validation topic's format, while retaining English submit IDs and translated display text.
+All six files parse as valid JSON. Exactly two resource keys per file were moved from the static card-title paths to the text-variable paths. All translated values and all other keys are preserved. The pre-migration files are backed up under `revisions/feedback-completion/backups/localizations-before-label-variables/`.
 
 ## Files to upload
 
@@ -24,8 +24,8 @@ The original language-specific title values are restored. All other translations
 
 In Copilot Studio, use Settings -> Languages -> Upload for each matching language and select its JSON file. These local changes have not been uploaded or published by Codex. Reset the test conversation after uploading and test Start Feedback and End Demo in each language.
 
-Use these resources with the formula-card topic and two English routing conditions in `revisions/feedback-completion/form7.FormSubmission.yaml`. A localization file changes displayed text; it does not install those topic-code changes. If Studio's current export changes the card resource paths after conversion, reconcile these translations with that export before uploading.
+Save the revised topic in `revisions/feedback-completion/form7.FormSubmission.yaml` before uploading these files. It uses the translated text variables as button titles and normalizes the returned title to the English routing value. A localization file does not install the topic-code changes. If Studio's current export uses different text-variable paths, reconcile these two entries with that export before uploading.
 
 ## Adding a language
 
-Translate button titles through the normal localization workflow. Keep submit IDs unchanged in the topic. The intended result is that the Formula card returns the English submit ID even while displaying a translated title. This must be confirmed in Studio; it has not been executed by Codex. The working validation topic and its localization entries were not changed.
+Translate the two text-variable `.Value` entries through the normal localization workflow. The topic compares the returned value with its current translated label, then normalizes it to `Start Feedback` or `End Demo`. No additional condition is needed per language. The raw response can still contain a translated title; the canonical topic variable is what the two English conditions use. This has not yet been tested in Studio. The working validation topic and its localization entries were not changed.

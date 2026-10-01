@@ -1,38 +1,60 @@
-# Return normally after mock submission feedback
+# Translated feedback buttons with fixed routing conditions
 
-Apply these two proposed replacements after the working review-loop changes. Originals in `topics/` remain unchanged. No email or translation action is added in this step.
+Apply these proposed topic replacements after the working review-loop changes. Originals in topics/ remain unchanged. No email or translation flow is added in this step.
 
-## form7.FormSubmission
+## Confirmed incoming response
 
-At the beginning of this topic, `initializeFeedbackData` clears feedback for this form. Card `8NF3jZ` now uses a Power Fx formula, matching the working FormValidation card's format. Its primary-language title, id, and data.actionSubmitId are `Start Feedback` or `End Demo`. Localization keeps the visible titles translated; routing IDs remain English. Its output remains `Topic.feedbackForm`. The previous JSON-card version is retained in `backups/form7.FormSubmission.JSON.yaml`.
+The user captured Spanish incoming payloads with actionSubmitId and altText both equal to the translated button title: Finalizar demostración or Iniciar comentarios. The bound Topic.feedbackForm matches those values. The response itself already contains a translated identifier; the output binding is not where an English ID becomes translated.
 
-Condition `conditionItem_bmmUxX` checks only `Lower(Trim(Topic.feedbackForm)) = "start feedback"` and redirects at `C6mX0V` to `brandon_Agent09232026.topic.wf9dev.Feedback`. Confirm that this is the actual schema name of the topic displayed as helper4.Feedback in your agent.
+Conversion from JSON to Power Fx alone did not resolve this path. The layer generating these values and the reason FormValidation behaves differently remain unconfirmed.
 
-`endDemoSelected` recognizes `End Demo` and clears feedback. An unknown output repeats the card and displays the actual value instead of treating it as a confirmed End Demo. `Tk0LIe` ends the current topic and returns to InternationalFormWorkflow, whose existing final node ends its topic stack.
+## Current form7.FormSubmission change
+
+The buttons retain English id and data.actionSubmitId values, but their titles now use localizable text variables:
+
+| Node | Variable | Primary-language value |
+| --- | --- | --- |
+| setFeedbackStartLabel (SetTextVariable) | Topic.FeedbackStartLabel | Start Feedback |
+| setFeedbackEndLabel (SetTextVariable) | Topic.FeedbackEndLabel | End Demo |
+
+Both nodes run before card 8NF3jZ. The formula card uses title: Topic.FeedbackStartLabel and title: Topic.FeedbackEndLabel, so the exact displayed titles are available to the subsequent routing logic.
+
+The output binding remains actionSubmitId -> Topic.feedbackForm (String). After the card:
+
+1. captureRawFeedbackAction preserves the received value in Topic.RawFeedbackAction.
+2. normalizeFeedbackAction recognizes either the English value or the current label variable and writes Start Feedback or End Demo into Topic.feedbackForm. It retains unknown raw values so the existing error path can show them.
+3. Temporary message debugFeedbackNormalizedV3 shows the raw value, normalized value, and both current labels.
+4. conditionItem_bmmUxX and endDemoSelected keep their two English conditions. No list of translated titles is needed.
+
+For a Spanish label variable equal to Iniciar comentarios, a response containing that same text normalizes to Start Feedback. Adding a language only translates the label variables through the ordinary localization process; it does not add conditions.
+
+This normalizes the observed title-based response. It does not change what the client sends or explain the platform's ID-versus-title behavior.
+
+## Install the topic and localization entries together
+
+1. Replace the live FormSubmission topic with form7.FormSubmission.yaml. Its internal name must be brandon_Agent09232026.topic.wf8.FormSubmission, called by InternationalFormWorkflow node taTAMt.
+2. Save the topic and run Topic checker for the text-variable nodes, formula card, output schema, and normalization formula.
+3. Upload each matching JSON file from Localizations/. The existing translations for the two button titles were moved to the new text-variable .Value entries; all other values are retained. If Studio's freshly downloaded export uses different paths, reconcile the two entries with that export before upload.
+4. Reset the conversation and click the newest card.
+
+Microsoft documents SetTextVariable for localizable text referenced by Adaptive Cards. [Multilingual agents](https://learn.microsoft.com/en-us/microsoft-copilot-studio/multilingual), [Localize Adaptive Card content](https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/localize-adaptive-cards).
+
+The previous JSON topic is in backups/form7.FormSubmission.JSON.yaml. Localization files immediately before this key migration are in backups/localizations-before-label-variables/.
 
 ## helper4.Feedback
 
-Use a normal `OnRedirect` trigger and remove `startBehavior: CancelOtherTopics` so this topic can be called as part of the existing form. Keep question `CF7xoW`, the English `skip` check, and thank-you message `AoIk6Y`.
+Use a normal OnRedirect trigger and remove startBehavior: CancelOtherTopics so this topic can return to its caller. Keep question CF7xoW, the English skip check, and thank-you message AoIk6Y.
 
-Replace the Fallback redirect `U7pelG` with `EndDialog` (`returnFromFeedback`). It returns to FormSubmission. The old redirect could reenter the no-answer/form-entry path after feedback; the actual behavior depends on the live Fallback topic, which was not supplied.
+Replace the Fallback redirect U7pelG with EndDialog returnFromFeedback. This returns to FormSubmission, which returns to InternationalFormWorkflow. [Microsoft topic management documentation](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-topic-management).
 
-Microsoft documents that End current topic returns to its calling topic. [Manage topics](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-topic-management).
+Confirm the actual Feedback topic has internal name brandon_Agent09232026.topic.wf9dev.Feedback, as called by C6mX0V.
 
-## Test before the next change
+## Live tests still required
 
-1. Proceed -> Start Feedback -> enter a comment: thank-you, then complete with no Fallback or new form.
-2. Proceed -> Start Feedback -> type `skip`: empty Global.feedbackData, then complete.
-3. Proceed -> End Demo: no feedback prompt; empty Global.feedbackData; complete.
-4. Repeat in both previously tested languages with translated button titles. `debugFeedbackAction` displays `FeedbackAction=[...]` immediately after submission. The intended result is `Start Feedback` or `End Demo` regardless of the displayed language. Remove this temporary diagnostic after the live test passes. The text command `skip` is currently English, as in the supplied topic.
+1. English Start Feedback: Routed = Start Feedback; collect a comment and finish normally.
+2. Spanish or German translated Start Feedback: Raw matches StartLabel; Routed = Start Feedback; open Feedback.
+3. Translated End Demo: Raw matches EndLabel; Routed = End Demo; complete without a feedback prompt.
+4. Type skip in Feedback: clear the feedback and return normally. This command is still English, as in the supplied topic.
+5. An unknown response: keep the existing retry/error path rather than treating it as End Demo.
 
-## Preserve translated titles; test formula-mode submission
-
-The user clarified that visible button titles must remain translated. The earlier English-only localization change has been reversed in all six files. Localization keys, translated messages, and the two original translated button titles are retained.
-
-The saved review card uses Power Fx and routes on English Proceed/Edit values, while its supplied localization files translate the visible titles. The feedback card previously used JSON. This revision changes only the feedback card's representation, preserves its data/output/conditions, and adds one temporary diagnostic. That is a controlled test of the user's reported JSON-versus-Power-Fx behavior. It is not proof that all Copilot Studio JSON cards mishandle action IDs, or a guarantee that Formula mode changes a host's submission payload.
-
-In Studio, card `8NF3jZ` -> Properties -> Formula converts a JSON card to Power Fx. Alternatively, paste this revised YAML topic. Keep the output binding actionSubmitId -> Topic.feedbackForm with type String. If the English-only files were already uploaded, upload the restored translated files from `Localizations/` for each matching language. If Studio changes resource keys when saving the formula card, download the current localization export and reconcile the entries for this same topic/node.
-
-Microsoft documents Formula mode and its built-in JSON conversion, and button titles as localizable Adaptive Card text. [Ask with Adaptive Cards](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-ask-with-adaptive-card), [Localize Adaptive Card content](https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/localize-adaptive-cards).
-
-The next backend step is explicit mapping and validation of the International Form Email inputs. The current submission remains a mock, and no email has been sent by these local changes.
+After these pass, remove debugFeedbackNormalizedV3. The raw capture and normalization nodes remain necessary for this compatibility route. Codex has not executed or type-checked this revised topic in Studio.

@@ -24,7 +24,11 @@ The parser checks confirm JSON syntax, not full Adaptive Cards schema conformanc
 
 ### Supplied localization files updated
 
-The user supplied six localization JSON files (de-DE, es-US, ja-JP, ko-KR, zh-CN, zh-TW). An initial English-only edit changed two button titles per file and was validated. The user then clarified that these titles should remain translated and pointed out that the working review card is a Power Fx card while feedback is JSON. The original translated titles have been restored. The proposed form7.FormSubmission revision is now a Formula card with the same primary-language button values, output binding, and English conditions, plus a temporary FeedbackAction diagnostic. Upload instructions are in `Localizations/README.md`. Formula-mode feedback behavior has not been tested in Studio by Codex or confirmed by the user.
+The user supplied six localization JSON files (de-DE, es-US, ja-JP, ko-KR, zh-CN, zh-TW). An initial English-only edit was reversed when the user clarified that button titles must remain translated. Conversion of form7.FormSubmission to a Formula card preserved the card contents, output binding, and conditions, but the user still observed German titles in the action output.
+
+The user then captured Spanish incoming payloads containing only `actionSubmitId` and `altText`, both equal to the translated title (`Finalizar demostración` or `Iniciar comentarios`). The bound output matched the payload. Thus the observed translated identifier is already present before output binding; Formula mode alone is insufficient. The responsible rendering/submission layer and the difference from the working review card remain unconfirmed.
+
+The current proposed compatibility route uses two SetTextVariable label variables to render the translated buttons, preserves the raw action, and normalizes either an English value or the current localized label to the canonical English feedback value. The two routing conditions remain English. In all six localization files, the existing two title translations were moved to the corresponding text-variable `.Value` keys; JSON parsing and exact before/after dictionary comparison confirmed no value changes or unrelated key changes. The revised topic and its localization entries must be installed together and tested in Studio. No agent execution or full Power Fx type-checking was performed by Codex.
 
 ### Review repair confirmed by the user
 

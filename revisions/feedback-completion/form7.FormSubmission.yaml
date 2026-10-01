@@ -8,6 +8,16 @@ beginDialog:
       variable: Global.feedbackData
       value: =""
 
+    - kind: SetTextVariable
+      id: setFeedbackStartLabel
+      variable: Topic.FeedbackStartLabel
+      value: Start Feedback
+
+    - kind: SetTextVariable
+      id: setFeedbackEndLabel
+      variable: Topic.FeedbackEndLabel
+      value: End Demo
+
     - kind: AdaptiveCardPrompt
       id: 8NF3jZ
       card: |-
@@ -49,7 +59,7 @@ beginDialog:
               actions: [
                 {
                   type: "Action.Submit",
-                  title: "Start Feedback",
+                  title: Topic.FeedbackStartLabel,
                   id: "Start Feedback",
                   data: {
                     actionSubmitId: "Start Feedback"
@@ -58,7 +68,7 @@ beginDialog:
                 },
                 {
                   type: "Action.Submit",
-                  title: "End Demo",
+                  title: Topic.FeedbackEndLabel,
                   id: "End Demo",
                   data: {
                     actionSubmitId: "End Demo"
@@ -79,9 +89,29 @@ beginDialog:
         properties:
           actionSubmitId: String
 
+    - kind: SetVariable
+      id: captureRawFeedbackAction
+      variable: Topic.RawFeedbackAction
+      value: =Topic.feedbackForm
+
+    - kind: SetVariable
+      id: normalizeFeedbackAction
+      variable: Topic.feedbackForm
+      value: |-
+        =With(
+          { submitted: Lower(Trim(Topic.RawFeedbackAction)) },
+          If(
+            submitted = "start feedback" || submitted = Lower(Trim(Topic.FeedbackStartLabel)),
+            "Start Feedback",
+            submitted = "end demo" || submitted = Lower(Trim(Topic.FeedbackEndLabel)),
+            "End Demo",
+            Topic.RawFeedbackAction
+          )
+        )
+
     - kind: SendActivity
-      id: debugFeedbackAction
-      activity: "FeedbackAction=[{Topic.feedbackForm}]"
+      id: debugFeedbackNormalizedV3
+      activity: "FEEDBACK V3 | Raw=[{Topic.RawFeedbackAction}] | Routed=[{Topic.feedbackForm}] | StartLabel=[{Topic.FeedbackStartLabel}] | EndLabel=[{Topic.FeedbackEndLabel}]"
 
     - kind: ConditionGroup
       id: conditionGroup_weE5Pg
