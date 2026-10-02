@@ -22,6 +22,20 @@ The parser checks confirm JSON syntax, not full Adaptive Cards schema conformanc
 
 ## Live checks still needed
 
+### Latest user confirmations and email proposal
+
+The user later supplied the revised International Form Email trigger and Condition. Copies are in snapshots/2026-10-01/email-validation-as-supplied/. The trigger now requires the intended eight fields, and both response schemas have Boolean success and Text status. All eight left-side blank checks are correct, but each right side references its string input rather than Boolean false. The False branch handles invalidInput; the True branch only responds after the send succeeds and has no response configured for a send failure. Manual designer corrections are recorded in revisions/email-submission/CURRENT_FLOW_REVIEW.md. These findings are source-confirmed and have not been applied or tested live by Codex.
+
+The user confirmed on October 1 that adding `alwaysPrompt: true` to Feedback question CF7xoW works. The exact final languages, saved written feedback value, and English skip result were not separately reported.
+
+The user then confirmed that the email function works after placing its call at the end of form7.FormSubmission before ending topics. Record this as a successful user-reported live email path. The latest live topic source, flow run inputs, and response bindings were not supplied. Retain one email call after conditionGroup_weE5Pg and before EndDialog Tk0LIe; do not also add a call after FormSubmission in InternationalFormWorkflow.
+
+Optional validation and error-handling revisions are saved in `revisions/email-submission/`. They use the same single-call placement, explicit mappings for all fifteen inputs, eight required form fields, approval/attempt flags, consistent flow responses, HTML encoding, and separate email-phase localization copies. The user's working live call does not need to be replaced simply because these proposals exist.
+
+Local checks confirmed all fifteen mappings, required keys, identical response schemas, run-after failure paths, a single call in FormSubmission, no duplicate unquoted topic node IDs, and valid Goto targets. A small local expression evaluator checked twenty-four blank required-field cases, eight invalid contact-address cases, literal HTML/quotes/apostrophes, CRLF/LF/CR conversion, and missing/null/case-number subjects. All cases passed after making both subject-expression branches tolerate a missing case number. This evaluator is a local model of the used functions, not the Power Automate engine. All six phase localization copies parsed as UTF-8 JSON; comparison showed exactly three existing submission values changed and seven new message entries per file. New review instructions match the supplied translated Proceed labels. Root localization files were retained.
+
+No full YAML parser, Studio type checker, action-wrapper schema, or fresh localization export was available for these revisions. EmailWorkflow's actual internal schema name must be selected from the live topic picker if applying the proposal. No connector execution, email send, upload, or publishing was performed by Codex. Remaining live checks include written feedback in `text_14`, empty optional fields/English skip/End Demo, handled failure, and duplicate calls for the same draft.
+
 ### Supplied localization files updated
 
 The user supplied six localization JSON files (de-DE, es-US, ja-JP, ko-KR, zh-CN, zh-TW). An initial English-only edit was reversed when the user clarified that button titles must remain translated. Conversion of form7.FormSubmission to a Formula card preserved the card contents, output binding, and conditions, but the user still observed German titles in the action output.
@@ -30,11 +44,15 @@ The user then captured Spanish incoming payloads containing only `actionSubmitId
 
 The current proposed compatibility route uses two SetTextVariable label variables to render the translated buttons, preserves the raw action, and normalizes either an English value or the current localized label to the canonical English feedback value. The two routing conditions remain English. In all six localization files, the existing two title translations were moved to the corresponding text-variable `.Value` keys; JSON parsing and exact before/after dictionary comparison confirmed no value changes or unrelated key changes. The revised topic and its localization entries must be installed together and tested in Studio. No agent execution or full Power Fx type-checking was performed by Codex.
 
+On October 1, 2026, the user confirmed the Spanish Start Feedback path with `Raw=[Iniciar comentarios]`, `Routed=[Start Feedback]`, `StartLabel=[Iniciar comentarios]`, and `EndLabel=[Finalizar demostración]`. The topic then displayed its Spanish thank-you message. The user subsequently confirmed `Raw=[Finalizar demostración]` and `Routed=[End Demo]` with the matching EndLabel. This confirms normalization of both Spanish buttons and the Feedback path through the thank-you node. The temporary V3 message has been removed from the saved topic. Skip behavior, other languages, and backend submission remain separate checks.
+
 ### Review repair confirmed by the user
 
 On October 1, 2026, the user confirmed that matching the review button title, id, and data.actionSubmitId (`Proceed` / `Edit`) works in both tested languages. They then confirmed that Edit -> change Preliminary Info -> return to review -> Proceed passes. The revised sources are in `revisions/review-loop/`; the original snapshot remains unchanged. These results supersede the earlier untested status for the specific Preliminary Info edit/review path. Other section, language, backend, and published-channel checks remain separate.
 
-The next proposed change is in `revisions/feedback-completion/`: match the mock-submission button titles and IDs, return from Feedback instead of redirecting to Fallback, and keep skipped feedback empty. It has not been installed or tested in Studio.
+The follow-on change in `revisions/feedback-completion/` uses localized label variables and normalization for the feedback buttons, returns from Feedback instead of redirecting to Fallback, and keeps skipped feedback empty. The user has confirmed both Spanish button normalizations and the Start Feedback path through the thank-you message. They subsequently reported that question CF7xoW was skipped in English and non-English sessions. Reaching the thank-you node does not establish that a written response was collected.
+
+The saved helper4.Feedback revision now sets `alwaysPrompt: true` on CF7xoW. Microsoft documents Ask every time as the setting that asks even when the question variable already contains a value. This repair was checked for placement and preservation of the remaining topic text; it has not been executed in Studio. Test that clicking Start Feedback shows the question and waits, that a new comment is saved to Global.feedbackData, and that English skip clears the value and returns. Existing button normalization requires no changes for this repair. [Question behavior documentation](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-ask-a-question).
 
 ### User-reported runtime observation
 

@@ -1,0 +1,92 @@
+[
+  {
+    "key": "text",
+    "title": "userRequest",
+    "variable": "Global.UserRequest",
+    "required": true
+  },
+  {
+    "key": "text_1",
+    "title": "contactName",
+    "variable": "Global.contactName",
+    "required": true
+  },
+  {
+    "key": "text_2",
+    "title": "contactEmail",
+    "variable": "Global.contactEmail",
+    "required": true
+  },
+  {
+    "key": "text_3",
+    "title": "caseNumber",
+    "variable": "Global.caseNumber",
+    "required": false
+  },
+  {
+    "key": "text_4",
+    "title": "airTechniquesContact",
+    "variable": "Global.airTechniquesContact",
+    "required": false
+  },
+  {
+    "key": "text_5",
+    "title": "dealerName",
+    "variable": "Global.dealerName",
+    "required": false
+  },
+  {
+    "key": "text_6",
+    "title": "dealerBranch",
+    "variable": "Global.dealerBranch",
+    "required": false
+  },
+  {
+    "key": "text_7",
+    "title": "dealerPhone",
+    "variable": "Global.dealerPhone",
+    "required": false
+  },
+  {
+    "key": "text_8",
+    "title": "dealerAddress",
+    "variable": "Global.dealerAddress",
+    "required": false
+  },
+  {
+    "key": "text_9",
+    "title": "practiceName",
+    "variable": "Global.practiceName",
+    "required": true
+  },
+  {
+    "key": "text_10",
+    "title": "practicePhone",
+    "variable": "Global.practicePhone",
+    "required": true
+  },
+  {
+    "key": "text_11",
+    "title": "practiceAddress",
+    "variable": "Global.practiceAddress",
+    "required": true
+  },
+  {
+    "key": "text_12",
+    "title": "deviceModelOrPartNumber",
+    "variable": "Global.deviceModelOrPartNumber",
+    "required": true
+  },
+  {
+    "key": "text_13",
+    "title": "deviceSerialNumber",
+    "variable": "Global.deviceSerialNumber",
+    "required": true
+  },
+  {
+    "key": "text_14",
+    "title": "writtenFeedback",
+    "variable": "Global.feedbackData",
+    "required": false
+  }
+]

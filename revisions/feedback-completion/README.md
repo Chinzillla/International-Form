@@ -23,7 +23,7 @@ The output binding remains actionSubmitId -> Topic.feedbackForm (String). After 
 
 1. captureRawFeedbackAction preserves the received value in Topic.RawFeedbackAction.
 2. normalizeFeedbackAction recognizes either the English value or the current label variable and writes Start Feedback or End Demo into Topic.feedbackForm. It retains unknown raw values so the existing error path can show them.
-3. Temporary message debugFeedbackNormalizedV3 shows the raw value, normalized value, and both current labels.
+3. The temporary debugFeedbackNormalizedV3 message was removed from the saved revision after the user confirmed both Spanish button values normalize correctly.
 4. conditionItem_bmmUxX and endDemoSelected keep their two English conditions. No list of translated titles is needed.
 
 For a Spanish label variable equal to Iniciar comentarios, a response containing that same text normalizes to Start Feedback. Adding a language only translates the label variables through the ordinary localization process; it does not add conditions.
@@ -45,16 +45,25 @@ The previous JSON topic is in backups/form7.FormSubmission.JSON.yaml. Localizati
 
 Use a normal OnRedirect trigger and remove startBehavior: CancelOtherTopics so this topic can return to its caller. Keep question CF7xoW, the English skip check, and thank-you message AoIk6Y.
 
+On October 1, the user reported that Start Feedback went directly to the thank-you message in English and non-English sessions, without asking for written feedback. This supersedes any assumption that reaching the thank-you node proved feedback collection worked. Button normalization still passed.
+
+In helper4.Feedback (internal name brandon_Agent09232026.topic.wf9dev.Feedback), add `alwaysPrompt: true` directly below `id: CF7xoW`. This enables **Ask every time** on the Question node. It prevents an existing response-variable value from causing the question to be skipped. The current contents of Global.feedbackData at the skipped node were not captured, so the source of any prefilled value remains unconfirmed. Do not change the working FormSubmission button routing for this repair.
+
+In the visual editor, the equivalent setting is CF7xoW -> three dots -> Properties -> Question behavior -> Skip behavior -> Ask every time. [Microsoft Question node documentation](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-ask-a-question).
+
 Replace the Fallback redirect U7pelG with EndDialog returnFromFeedback. This returns to FormSubmission, which returns to InternationalFormWorkflow. [Microsoft topic management documentation](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-topic-management).
 
 Confirm the actual Feedback topic has internal name brandon_Agent09232026.topic.wf9dev.Feedback, as called by C6mX0V.
 
 ## Live tests still required
 
-1. English Start Feedback: Routed = Start Feedback; collect a comment and finish normally.
-2. Spanish or German translated Start Feedback: Raw matches StartLabel; Routed = Start Feedback; open Feedback.
+Confirmed by the user on October 1, 2026: Spanish Raw = Iniciar comentarios, Routed = Start Feedback, and StartLabel = Iniciar comentarios. The Feedback topic reached its Spanish thank-you message. The user then confirmed Raw = Finalizar demostración, Routed = End Demo, and EndLabel = Finalizar demostración. Both Spanish button values normalize correctly. A later report showed that the written-feedback question was skipped in both English and non-English sessions. The user subsequently confirmed that adding alwaysPrompt: true fixes the question. The exact tested languages and written output value were not separately reported for this final repair; skip behavior and stored payload still need explicit checks.
+
+1. English Start Feedback: show question CF7xoW and wait. Enter a distinctive comment; only then show the thank-you message. Inspect Global.feedbackData to confirm it contains that comment, not the clicked button title.
+2. German and other supported-language Start Feedback: Raw matches StartLabel; Routed = Start Feedback; show the translated question and wait for a new typed response. Spanish button normalization passed, but waiting for written feedback still needs verification.
 3. Translated End Demo: Raw matches EndLabel; Routed = End Demo; complete without a feedback prompt.
 4. Type skip in Feedback: clear the feedback and return normally. This command is still English, as in the supplied topic.
 5. An unknown response: keep the existing retry/error path rather than treating it as End Demo.
+6. With previous feedback still in the conversation's variables, enter Feedback again: Ask every time must prompt for a new reply instead of reusing the old one.
 
-After these pass, remove debugFeedbackNormalizedV3. The raw capture and normalization nodes remain necessary for this compatibility route. Codex has not executed or type-checked this revised topic in Studio.
+The saved revision now omits debugFeedbackNormalizedV3; remove that message from the live topic as well. The raw capture and normalization nodes remain necessary for this compatibility route. Codex has not executed or type-checked this revised topic in Studio.

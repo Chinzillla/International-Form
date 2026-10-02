@@ -1,0 +1,149 @@
+{
+  "type": "If",
+  "expression": {
+    "and": [
+      {
+        "equals": [
+          "@empty(trim(coalesce(triggerBody()?['text'], '')))",
+          "@triggerBody()?['text']"
+        ]
+      },
+      {
+        "equals": [
+          "@empty(trim(coalesce(triggerBody()?['text_1'], '')))",
+          "@triggerBody()?['text_1']"
+        ]
+      },
+      {
+        "equals": [
+          "@empty(trim(coalesce(triggerBody()?['text_2'], '')))",
+          "@triggerBody()?['text_2']"
+        ]
+      },
+      {
+        "equals": [
+          "@empty(trim(coalesce(triggerBody()?['text_9'], '')))",
+          "@triggerBody()?['text_9']"
+        ]
+      },
+      {
+        "equals": [
+          "@empty(trim(coalesce(triggerBody()?['text_10'], '')))",
+          "@triggerBody()?['text_10']"
+        ]
+      },
+      {
+        "equals": [
+          "@empty(trim(coalesce(triggerBody()?['text_11'], '')))",
+          "@triggerBody()?['text_11']"
+        ]
+      },
+      {
+        "equals": [
+          "@empty(trim(coalesce(triggerBody()?['text_12'], '')))",
+          "@triggerBody()?['text_12']"
+        ]
+      },
+      {
+        "equals": [
+          "@empty(trim(coalesce(triggerBody()?['text_13'], '')))",
+          "@triggerBody()?['text_13']"
+        ]
+      }
+    ]
+  },
+  "actions": {
+    "Send_an_email_(V2)": {
+      "type": "OpenApiConnection",
+      "inputs": {
+        "parameters": {
+          "emailMessage/To": "brandon.chin@airtechniques.com",
+          "emailMessage/Subject": "International Support Form - Case @{triggerBody()?['text_3']}",
+          "emailMessage/Body": "<h2>International Support Form</h2>\n\n<h3>Request</h3>\n<p>\n<strong>User Request:</strong><br>\n@{triggerBody()?['text']}\n</p>\n\n<hr>\n\n<h3>Preliminary Info</h3>\n\n<p>\n<strong>Contact Name:</strong> @{triggerBody()?['text_1']}<br>\n<strong>Contact Email:</strong> @{triggerBody()?['text_2']}<br>\n<strong>Case Number:</strong> @{triggerBody()?['text_3']}<br>\n<strong>AT Contact:</strong> @{triggerBody()?['text_4']}\n</p>\n\n<hr>\n\n<h3>Dealer Info</h3>\n\n<p>\n<strong>Dealer Name:</strong> @{triggerBody()?['text_5']}<br>\n<strong>Dealer Branch:</strong> @{triggerBody()?['text_6']}<br>\n<strong>Dealer Telephone:</strong> @{triggerBody()?['text_7']}<br>\n<strong>Dealer Address:</strong> @{triggerBody()?['text_8']}\n</p>\n\n<hr>\n\n<h3>Practice Info</h3>\n\n<p>\n<strong>Practice Name:</strong> @{triggerBody()?['text_9']}<br>\n<strong>Practice Telephone:</strong> @{triggerBody()?['text_10']}<br>\n<strong>Practice Address:</strong> @{triggerBody()?['text_11']}\n</p>\n\n<hr>\n\n<h3>Device Info</h3>\n\n<p>\n<strong>Model/Part Number:</strong> @{triggerBody()?['text_12']}<br>\n<strong>Serial Number:</strong> @{triggerBody()?['text_13']}\n</p>\n\n<hr>\n\n<h3>Additional Feedback</h3>\n\n<p>\n@{triggerBody()?['text_14']}\n</p>",
+          "emailMessage/Cc": "@triggerBody()?['text_2']",
+          "emailMessage/Importance": "Normal"
+        },
+        "host": {
+          "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+          "connection": "shared_office365",
+          "operationId": "SendEmailV2"
+        }
+      }
+    },
+    "Respond_to_the_agent_Success": {
+      "type": "Response",
+      "kind": "Skills",
+      "inputs": {
+        "schema": {
+          "type": "object",
+          "properties": {
+            "success": {
+              "title": "success",
+              "description": "",
+              "type": "boolean",
+              "x-ms-content-hint": "BOOLEAN",
+              "x-ms-dynamically-added": true
+            },
+            "status": {
+              "title": "status",
+              "description": "",
+              "type": "string",
+              "x-ms-content-hint": "TEXT",
+              "x-ms-dynamically-added": true
+            }
+          },
+          "additionalProperties": {}
+        },
+        "statusCode": 200,
+        "body": {
+          "success": "@true",
+          "status": "sent"
+        }
+      },
+      "runAfter": {
+        "Send_an_email_(V2)": [
+          "SUCCEEDED"
+        ]
+      }
+    }
+  },
+  "else": {
+    "actions": {
+      "Respond_to_the_agent_Failure": {
+        "type": "Response",
+        "kind": "Skills",
+        "inputs": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "success": {
+                "title": "success",
+                "description": "",
+                "type": "boolean",
+                "x-ms-content-hint": "BOOLEAN",
+                "x-ms-dynamically-added": true
+              },
+              "status": {
+                "title": "status",
+                "description": "",
+                "type": "string",
+                "x-ms-content-hint": "TEXT",
+                "x-ms-dynamically-added": true
+              }
+            },
+            "additionalProperties": {}
+          },
+          "statusCode": 200,
+          "body": {
+            "success": "@false",
+            "status": "invalidInput"
+          }
+        },
+        "metadata": {
+          "operationMetadataId": "81c94f73-dd52-465c-ad3b-a4686da63cc3"
+        }
+      }
+    }
+  },
+  "runAfter": {}
+}

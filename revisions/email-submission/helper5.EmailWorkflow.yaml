@@ -1,0 +1,127 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRedirect
+  id: main
+  actions:
+    - kind: ConditionGroup
+      id: emailSubmissionGate
+      conditions:
+        - id: emailAlreadySent
+          condition: =Global.EmailSucceeded = true
+          actions:
+            - kind: SendActivity
+              id: alreadySentMessage
+              activity: This support request has already been sent.
+
+            - kind: EndDialog
+              id: returnAlreadySent
+
+        - id: emailAlreadyAttempted
+          condition: =Global.EmailAttempted = true
+          actions:
+            - kind: SendActivity
+              id: previousAttemptMessage
+              activity: A send was already attempted for this request. Please check with support before submitting it again.
+
+            - kind: EndDialog
+              id: returnAlreadyAttempted
+
+        - id: reviewNotApproved
+          condition: =Coalesce(Global.FormReadyToSubmit, false) = false
+          actions:
+            - kind: SendActivity
+              id: requireReviewMessage
+              activity: Please complete the support form and select Proceed on the review card before sending.
+
+            - kind: EndDialog
+              id: returnWithoutApproval
+
+        - id: formReadyForEmail
+          condition: |-
+            =!IsBlank(Trim(Coalesce(Global.UserRequest, ""))) &&
+              !IsBlank(Trim(Coalesce(Global.contactName, ""))) &&
+              !IsBlank(Trim(Coalesce(Global.contactEmail, ""))) &&
+              !IsBlank(Trim(Coalesce(Global.practiceName, ""))) &&
+              !IsBlank(Trim(Coalesce(Global.practicePhone, ""))) &&
+              !IsBlank(Trim(Coalesce(Global.practiceAddress, ""))) &&
+              !IsBlank(Trim(Coalesce(Global.deviceModelOrPartNumber, ""))) &&
+              !IsBlank(Trim(Coalesce(Global.deviceSerialNumber, ""))) &&
+              IsMatch(Trim(Coalesce(Global.contactEmail, "")), "^[^\s@,;<>]+@[^\s@,;<>]+\.[^\s@,;<>]+$")
+          actions:
+            - kind: BeginDialog
+              id: 9ZHZ9i
+              dialog: brandon_Agent09232026.topic.Signin
+
+            - kind: SetMultipleVariables
+              id: initializeEmailAttempt
+              assignments:
+                - variable: Global.EmailAttempted
+                  value: =true
+                - variable: Topic.EmailSuccess
+                  value: =false
+                - variable: Topic.EmailStatus
+                  value: ="pending"
+
+            - kind: InvokeFlowAction
+              id: dpLGbg
+              input:
+                binding:
+                  text: =Coalesce(Global.UserRequest, "")
+                  text_1: =Coalesce(Global.contactName, "")
+                  text_2: =Coalesce(Global.contactEmail, "")
+                  text_3: =Coalesce(Global.caseNumber, "")
+                  text_4: =Coalesce(Global.airTechniquesContact, "")
+                  text_5: =Coalesce(Global.dealerName, "")
+                  text_6: =Coalesce(Global.dealerBranch, "")
+                  text_7: =Coalesce(Global.dealerPhone, "")
+                  text_8: =Coalesce(Global.dealerAddress, "")
+                  text_9: =Coalesce(Global.practiceName, "")
+                  text_10: =Coalesce(Global.practicePhone, "")
+                  text_11: =Coalesce(Global.practiceAddress, "")
+                  text_12: =Coalesce(Global.deviceModelOrPartNumber, "")
+                  text_13: =Coalesce(Global.deviceSerialNumber, "")
+                  text_14: =Coalesce(Global.feedbackData, "")
+              output:
+                binding:
+                  success: Topic.EmailSuccess
+                  status: Topic.EmailStatus
+              flowId: 88b55f37-5bbc-f111-aaaf-7ced8d42acd9
+
+            - kind: ConditionGroup
+              id: handleEmailResult
+              conditions:
+                - id: emailSendConfirmed
+                  condition: =Topic.EmailSuccess = true && Topic.EmailStatus = "sent"
+                  actions:
+                    - kind: SetVariable
+                      id: rememberEmailSuccess
+                      variable: Global.EmailSucceeded
+                      value: =true
+
+                    - kind: SendActivity
+                      id: emailSentMessage
+                      activity: Your support request has been emailed to our support team. A copy was sent to the contact email address you provided.
+
+              elseActions:
+                - kind: SendActivity
+                  id: emailUnconfirmedMessage
+                  activity: We could not confirm that your support email was sent. Please check with support before submitting it again.
+
+      elseActions:
+        - kind: SendActivity
+          id: incompleteFormMessage
+          activity: Please check all required fields and enter one valid contact email address, then select Proceed again.
+
+        - kind: BeginDialog
+          id: repairIncompleteForm
+          dialog: brandon_Agent09232026.topic.wf7.FormValidation
+
+        - kind: GotoAction
+          id: recheckSupportDraft
+          actionId: emailSubmissionGate
+
+    - kind: EndDialog
+      id: returnFromEmailWorkflow
+
+inputType: {}
+outputType: {}

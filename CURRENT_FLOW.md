@@ -2,6 +2,12 @@
 
 This describes the supplied snapshot, not verified behavior of a published agent. The complete AI routing configuration and action definitions were not supplied.
 
+## Latest reported live behavior
+
+On October 1, the user confirmed the repaired review/edit loop, both Spanish feedback button normalizations, and the `alwaysPrompt: true` fix that makes Feedback ask for a written reply. They subsequently reported that email works after adding its call at the end of form7.FormSubmission before ending topics.
+
+The intended position of that single call is after conditionGroup_weE5Pg and before EndDialog Tk0LIe: Start Feedback calls the Feedback topic and waits for its return; End Demo skips collection; both then reach email. The latest live source and run payload were not supplied, so the exact call and input/output configuration are not reconstructed here. Optional refinements in revisions/email-submission/ follow this placement; the main workflow does not add a second email call. The rest of this document continues to describe the original saved snapshot.
+
 ## Conversation start
 
 1. `topic0.ConversationStart` runs on `OnConversationStart`.

@@ -1,0 +1,168 @@
+{
+  "type": "If",
+  "expression": {
+    "equals": [
+      "@and(not(empty(trim(coalesce(triggerBody()?['text'], '')))), not(empty(trim(coalesce(triggerBody()?['text_1'], '')))), not(empty(trim(coalesce(triggerBody()?['text_2'], '')))), not(empty(trim(coalesce(triggerBody()?['text_9'], '')))), not(empty(trim(coalesce(triggerBody()?['text_10'], '')))), not(empty(trim(coalesce(triggerBody()?['text_11'], '')))), not(empty(trim(coalesce(triggerBody()?['text_12'], '')))), not(empty(trim(coalesce(triggerBody()?['text_13'], '')))), equals(length(split(trim(coalesce(triggerBody()?['text_2'], '')), '@')), 2), not(empty(first(split(trim(coalesce(triggerBody()?['text_2'], '')), '@')))), not(empty(last(split(trim(coalesce(triggerBody()?['text_2'], '')), '@')))), contains(last(split(trim(coalesce(triggerBody()?['text_2'], '')), '@')), '.'), not(startsWith(last(split(trim(coalesce(triggerBody()?['text_2'], '')), '@')), '.')), not(endsWith(last(split(trim(coalesce(triggerBody()?['text_2'], '')), '@')), '.')), not(contains(trim(coalesce(triggerBody()?['text_2'], '')), ' ')), not(contains(trim(coalesce(triggerBody()?['text_2'], '')), ';')), not(contains(trim(coalesce(triggerBody()?['text_2'], '')), ',')), not(contains(trim(coalesce(triggerBody()?['text_2'], '')), '<')), not(contains(trim(coalesce(triggerBody()?['text_2'], '')), '>')), not(contains(trim(coalesce(triggerBody()?['text_2'], '')), decodeUriComponent('%09'))), not(contains(trim(coalesce(triggerBody()?['text_2'], '')), decodeUriComponent('%0D'))), not(contains(trim(coalesce(triggerBody()?['text_2'], '')), decodeUriComponent('%0A'))))",
+      true
+    ]
+  },
+  "actions": {
+    "Encode_fields": {
+      "type": "Compose",
+      "inputs": {
+        "text": "@replace(replace(replace(replace(replace(replace(replace(replace(string(coalesce(triggerBody()?['text'], '')), '&', '&amp;'), '<', '&lt;'), '>', '&gt;'), '\"', '&quot;'), decodeUriComponent('%27'), '&#39;'), decodeUriComponent('%0D%0A'), decodeUriComponent('%0A')), decodeUriComponent('%0D'), decodeUriComponent('%0A')), decodeUriComponent('%0A'), '<br>')",
+        "text_1": "@replace(replace(replace(replace(replace(replace(replace(replace(string(coalesce(triggerBody()?['text_1'], '')), '&', '&amp;'), '<', '&lt;'), '>', '&gt;'), '\"', '&quot;'), decodeUriComponent('%27'), '&#39;'), decodeUriComponent('%0D%0A'), decodeUriComponent('%0A')), decodeUriComponent('%0D'), decodeUriComponent('%0A')), decodeUriComponent('%0A'), '<br>')",
+        "text_2": "@replace(replace(replace(replace(replace(replace(replace(replace(string(coalesce(triggerBody()?['text_2'], '')), '&', '&amp;'), '<', '&lt;'), '>', '&gt;'), '\"', '&quot;'), decodeUriComponent('%27'), '&#39;'), decodeUriComponent('%0D%0A'), decodeUriComponent('%0A')), decodeUriComponent('%0D'), decodeUriComponent('%0A')), decodeUriComponent('%0A'), '<br>')",
+        "text_3": "@replace(replace(replace(replace(replace(replace(replace(replace(string(coalesce(triggerBody()?['text_3'], '')), '&', '&amp;'), '<', '&lt;'), '>', '&gt;'), '\"', '&quot;'), decodeUriComponent('%27'), '&#39;'), decodeUriComponent('%0D%0A'), decodeUriComponent('%0A')), decodeUriComponent('%0D'), decodeUriComponent('%0A')), decodeUriComponent('%0A'), '<br>')",
+        "text_4": "@replace(replace(replace(replace(replace(replace(replace(replace(string(coalesce(triggerBody()?['text_4'], '')), '&', '&amp;'), '<', '&lt;'), '>', '&gt;'), '\"', '&quot;'), decodeUriComponent('%27'), '&#39;'), decodeUriComponent('%0D%0A'), decodeUriComponent('%0A')), decodeUriComponent('%0D'), decodeUriComponent('%0A')), decodeUriComponent('%0A'), '<br>')",
+        "text_5": "@replace(replace(replace(replace(replace(replace(replace(replace(string(coalesce(triggerBody()?['text_5'], '')), '&', '&amp;'), '<', '&lt;'), '>', '&gt;'), '\"', '&quot;'), decodeUriComponent('%27'), '&#39;'), decodeUriComponent('%0D%0A'), decodeUriComponent('%0A')), decodeUriComponent('%0D'), decodeUriComponent('%0A')), decodeUriComponent('%0A'), '<br>')",
+        "text_6": "@replace(replace(replace(replace(replace(replace(replace(replace(string(coalesce(triggerBody()?['text_6'], '')), '&', '&amp;'), '<', '&lt;'), '>', '&gt;'), '\"', '&quot;'), decodeUriComponent('%27'), '&#39;'), decodeUriComponent('%0D%0A'), decodeUriComponent('%0A')), decodeUriComponent('%0D'), decodeUriComponent('%0A')), decodeUriComponent('%0A'), '<br>')",
+        "text_7": "@replace(replace(replace(replace(replace(replace(replace(replace(string(coalesce(triggerBody()?['text_7'], '')), '&', '&amp;'), '<', '&lt;'), '>', '&gt;'), '\"', '&quot;'), decodeUriComponent('%27'), '&#39;'), decodeUriComponent('%0D%0A'), decodeUriComponent('%0A')), decodeUriComponent('%0D'), decodeUriComponent('%0A')), decodeUriComponent('%0A'), '<br>')",
+        "text_8": "@replace(replace(replace(replace(replace(replace(replace(replace(string(coalesce(triggerBody()?['text_8'], '')), '&', '&amp;'), '<', '&lt;'), '>', '&gt;'), '\"', '&quot;'), decodeUriComponent('%27'), '&#39;'), decodeUriComponent('%0D%0A'), decodeUriComponent('%0A')), decodeUriComponent('%0D'), decodeUriComponent('%0A')), decodeUriComponent('%0A'), '<br>')",
+        "text_9": "@replace(replace(replace(replace(replace(replace(replace(replace(string(coalesce(triggerBody()?['text_9'], '')), '&', '&amp;'), '<', '&lt;'), '>', '&gt;'), '\"', '&quot;'), decodeUriComponent('%27'), '&#39;'), decodeUriComponent('%0D%0A'), decodeUriComponent('%0A')), decodeUriComponent('%0D'), decodeUriComponent('%0A')), decodeUriComponent('%0A'), '<br>')",
+        "text_10": "@replace(replace(replace(replace(replace(replace(replace(replace(string(coalesce(triggerBody()?['text_10'], '')), '&', '&amp;'), '<', '&lt;'), '>', '&gt;'), '\"', '&quot;'), decodeUriComponent('%27'), '&#39;'), decodeUriComponent('%0D%0A'), decodeUriComponent('%0A')), decodeUriComponent('%0D'), decodeUriComponent('%0A')), decodeUriComponent('%0A'), '<br>')",
+        "text_11": "@replace(replace(replace(replace(replace(replace(replace(replace(string(coalesce(triggerBody()?['text_11'], '')), '&', '&amp;'), '<', '&lt;'), '>', '&gt;'), '\"', '&quot;'), decodeUriComponent('%27'), '&#39;'), decodeUriComponent('%0D%0A'), decodeUriComponent('%0A')), decodeUriComponent('%0D'), decodeUriComponent('%0A')), decodeUriComponent('%0A'), '<br>')",
+        "text_12": "@replace(replace(replace(replace(replace(replace(replace(replace(string(coalesce(triggerBody()?['text_12'], '')), '&', '&amp;'), '<', '&lt;'), '>', '&gt;'), '\"', '&quot;'), decodeUriComponent('%27'), '&#39;'), decodeUriComponent('%0D%0A'), decodeUriComponent('%0A')), decodeUriComponent('%0D'), decodeUriComponent('%0A')), decodeUriComponent('%0A'), '<br>')",
+        "text_13": "@replace(replace(replace(replace(replace(replace(replace(replace(string(coalesce(triggerBody()?['text_13'], '')), '&', '&amp;'), '<', '&lt;'), '>', '&gt;'), '\"', '&quot;'), decodeUriComponent('%27'), '&#39;'), decodeUriComponent('%0D%0A'), decodeUriComponent('%0A')), decodeUriComponent('%0D'), decodeUriComponent('%0A')), decodeUriComponent('%0A'), '<br>')",
+        "text_14": "@replace(replace(replace(replace(replace(replace(replace(replace(string(coalesce(triggerBody()?['text_14'], '')), '&', '&amp;'), '<', '&lt;'), '>', '&gt;'), '\"', '&quot;'), decodeUriComponent('%27'), '&#39;'), decodeUriComponent('%0D%0A'), decodeUriComponent('%0A')), decodeUriComponent('%0D'), decodeUriComponent('%0A')), decodeUriComponent('%0A'), '<br>')"
+      },
+      "runAfter": {}
+    },
+    "Send_an_email_(V2)": {
+      "type": "OpenApiConnection",
+      "inputs": {
+        "parameters": {
+          "emailMessage/To": "brandon.chin@airtechniques.com",
+          "emailMessage/Subject": "@if(empty(trim(coalesce(triggerBody()?['text_3'], ''))), 'International Support Form - New Request', concat('International Support Form - Case ', trim(coalesce(triggerBody()?['text_3'], ''))))",
+          "emailMessage/Body": "<h2>International Support Form</h2>\n\n<h3>Request</h3>\n<p>\n<strong>User Request:</strong><br>\n@{outputs('Encode_fields')?['text']}\n</p>\n\n<hr>\n\n<h3>Preliminary Info</h3>\n\n<p>\n<strong>Contact Name:</strong> @{outputs('Encode_fields')?['text_1']}<br>\n<strong>Contact Email:</strong> @{outputs('Encode_fields')?['text_2']}<br>\n<strong>Case Number:</strong> @{outputs('Encode_fields')?['text_3']}<br>\n<strong>AT Contact:</strong> @{outputs('Encode_fields')?['text_4']}\n</p>\n\n<hr>\n\n<h3>Dealer Info</h3>\n\n<p>\n<strong>Dealer Name:</strong> @{outputs('Encode_fields')?['text_5']}<br>\n<strong>Dealer Branch:</strong> @{outputs('Encode_fields')?['text_6']}<br>\n<strong>Dealer Telephone:</strong> @{outputs('Encode_fields')?['text_7']}<br>\n<strong>Dealer Address:</strong> @{outputs('Encode_fields')?['text_8']}\n</p>\n\n<hr>\n\n<h3>Practice Info</h3>\n\n<p>\n<strong>Practice Name:</strong> @{outputs('Encode_fields')?['text_9']}<br>\n<strong>Practice Telephone:</strong> @{outputs('Encode_fields')?['text_10']}<br>\n<strong>Practice Address:</strong> @{outputs('Encode_fields')?['text_11']}\n</p>\n\n<hr>\n\n<h3>Device Info</h3>\n\n<p>\n<strong>Model/Part Number:</strong> @{outputs('Encode_fields')?['text_12']}<br>\n<strong>Serial Number:</strong> @{outputs('Encode_fields')?['text_13']}\n</p>\n\n<hr>\n\n<h3>Additional Feedback</h3>\n\n<p>\n@{outputs('Encode_fields')?['text_14']}\n</p>",
+          "emailMessage/Cc": "@trim(coalesce(triggerBody()?['text_2'], ''))",
+          "emailMessage/Importance": "Normal"
+        },
+        "host": {
+          "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+          "connection": "shared_office365",
+          "operationId": "SendEmailV2"
+        },
+        "retryPolicy": {
+          "type": "none"
+        }
+      },
+      "runAfter": {
+        "Encode_fields": [
+          "Succeeded"
+        ]
+      }
+    },
+    "Respond_Sent": {
+      "type": "Response",
+      "kind": "Skills",
+      "inputs": {
+        "schema": {
+          "type": "object",
+          "properties": {
+            "success": {
+              "title": "success",
+              "description": "True only after the email send action succeeds.",
+              "type": "boolean"
+            },
+            "status": {
+              "title": "status",
+              "description": "sent, invalidInput, or failed.",
+              "type": "string",
+              "x-ms-content-hint": "TEXT"
+            }
+          },
+          "required": [
+            "success",
+            "status"
+          ]
+        },
+        "statusCode": 200,
+        "body": {
+          "success": true,
+          "status": "sent"
+        }
+      },
+      "runAfter": {
+        "Send_an_email_(V2)": [
+          "Succeeded"
+        ]
+      }
+    },
+    "Respond_SendFailure": {
+      "type": "Response",
+      "kind": "Skills",
+      "inputs": {
+        "schema": {
+          "type": "object",
+          "properties": {
+            "success": {
+              "title": "success",
+              "description": "True only after the email send action succeeds.",
+              "type": "boolean"
+            },
+            "status": {
+              "title": "status",
+              "description": "sent, invalidInput, or failed.",
+              "type": "string",
+              "x-ms-content-hint": "TEXT"
+            }
+          },
+          "required": [
+            "success",
+            "status"
+          ]
+        },
+        "statusCode": 200,
+        "body": {
+          "success": false,
+          "status": "failed"
+        }
+      },
+      "runAfter": {
+        "Send_an_email_(V2)": [
+          "Failed",
+          "TimedOut",
+          "Skipped"
+        ]
+      }
+    }
+  },
+  "else": {
+    "actions": {
+      "Respond_InvalidInput": {
+        "type": "Response",
+        "kind": "Skills",
+        "inputs": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "success": {
+                "title": "success",
+                "description": "True only after the email send action succeeds.",
+                "type": "boolean"
+              },
+              "status": {
+                "title": "status",
+                "description": "sent, invalidInput, or failed.",
+                "type": "string",
+                "x-ms-content-hint": "TEXT"
+              }
+            },
+            "required": [
+              "success",
+              "status"
+            ]
+          },
+          "statusCode": 200,
+          "body": {
+            "success": false,
+            "status": "invalidInput"
+          }
+        },
+        "runAfter": {}
+      }
+    }
+  },
+  "runAfter": {}
+}

@@ -16,7 +16,7 @@ beginDialog:
     - kind: SetTextVariable
       id: setFeedbackEndLabel
       variable: Topic.FeedbackEndLabel
-      value: End Demo
+      value: Send without feedback
 
     - kind: AdaptiveCardPrompt
       id: 8NF3jZ
@@ -28,12 +28,12 @@ beginDialog:
           body: [
             {
               type: "TextBlock",
-              text: "Mock Submission - {Insert any message here}",
+              text: "Your support request is ready to send.",
               wrap: true
             },
             {
               type: "TextBlock",
-              text: "Thank you for testing the International Support Form for Digital Equipment. Please leave your feedback if you have any on the form.",
+              text: "Add optional feedback, then we will send your support request. Or choose Send without feedback. The email includes your form details, and a copy goes to your contact email address.",
               wrap: true,
               spacing: "Large"
             },
@@ -73,7 +73,7 @@ beginDialog:
                   data: {
                     actionSubmitId: "End Demo"
                   },
-                  style: "destructive"
+                  style: "default"
                 }
               ],
               spacing: "Large",
@@ -130,11 +130,15 @@ beginDialog:
       elseActions:
         - kind: SendActivity
           id: unknownSubmissionAction
-          activity: "Submission action was not recognized: [{Topic.feedbackForm}]. Please select Start Feedback or End Demo on the current card."
+          activity: "Submission action was not recognized: [{Topic.feedbackForm}]. Please select Start Feedback or Send without feedback on the current card."
 
         - kind: GotoAction
           id: retrySubmissionAction
           actionId: 8NF3jZ
+
+    - kind: BeginDialog
+      id: callEmailWorkflow
+      dialog: brandon_Agent09232026.topic.helper5.EmailWorkflow
 
     - kind: EndDialog
       id: Tk0LIe

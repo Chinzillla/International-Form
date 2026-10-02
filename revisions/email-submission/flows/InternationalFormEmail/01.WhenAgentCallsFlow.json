@@ -1,0 +1,132 @@
+{
+  "type": "Request",
+  "kind": "Skills",
+  "inputs": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "User Request",
+          "title": "userRequest",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_1": {
+          "description": "Contact person's name",
+          "title": "contactName",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_2": {
+          "description": "Contact person's email address",
+          "title": "contactEmail",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_3": {
+          "description": "Air Techniques case number",
+          "title": "caseNumber",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_4": {
+          "description": "Air Techniques contact",
+          "title": "airTechniquesContact",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_5": {
+          "description": "Dealer name",
+          "title": "dealerName",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_6": {
+          "description": "Dealer branch",
+          "title": "dealerBranch",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_7": {
+          "description": "Dealer telephone number",
+          "title": "dealerPhone",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_8": {
+          "description": "Dealer address",
+          "title": "dealerAddress",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_9": {
+          "description": "Practice name",
+          "title": "practiceName",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_10": {
+          "description": "Practice telephone number",
+          "title": "practicePhone",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_11": {
+          "description": "Practice address",
+          "title": "practiceAddress",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_12": {
+          "description": "Device model or part number",
+          "title": "deviceModelOrPartNumber",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_13": {
+          "description": "Device serial number",
+          "title": "deviceSerialNumber",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        },
+        "text_14": {
+          "description": "Optional written survey feedback",
+          "title": "writtenFeedback",
+          "type": "string",
+          "x-ms-content-hint": "TEXT",
+          "x-ms-dynamically-added": true
+        }
+      },
+      "required": [
+        "text",
+        "text_1",
+        "text_2",
+        "text_9",
+        "text_10",
+        "text_11",
+        "text_12",
+        "text_13"
+      ]
+    }
+  },
+  "metadata": {
+    "operationMetadataId": "b8f61c18-7224-4f8a-9c5f-72fbce5df764",
+    "flowSystemMetadata": {
+      "flowKind": "Stateless"
+    }
+  }
+}

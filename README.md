@@ -11,6 +11,7 @@ The supplied logic is preserved in `topics/` and `flows/`. Findings and suggeste
 - [Corrected editor copy](revisions/helper2.FormValidationEditor.yaml): the latest supplied editor with normalization, TRACE A, and all five section conditions changed to use `Topic.SectionRoute`. This addresses section routing only; the other review findings remain.
 - [Proceed and review-loop repair](revisions/review-loop/README.md): seven revised topic copies that remove nested review calls and give Proceed/Edit stable identifiers. This supersedes the earlier editor-only revision when applied as a set.
 - [Feedback completion repair](revisions/feedback-completion/README.md): revised submission and feedback topics with a Power Fx submission card, English routing IDs, translated button titles, and a normal return after feedback.
+- [Email submission proposal](revisions/email-submission/README.md): explicit field mappings, required-field checks, and flow success/failure responses. The user reports email works with one call at the end of FormSubmission; these are optional refinements, with no second call in the main workflow.
 - [Localization upload notes](Localizations/README.md): six supplied localization files with translated feedback button titles restored.
 
 ## Saved files
